@@ -1,4 +1,6 @@
+from src.database.database import Database
 class Event:
-    def Create():
-        #Create Function
-        pass
+    def __init__(self):
+        self.databaseModel = Database('event')
+    def getAll(self):
+        return self.databaseModel.getData()
