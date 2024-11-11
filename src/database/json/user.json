@@ -1,0 +1,12 @@
+{
+    "current_id": 0,
+    "datas": {
+        "rikanaap": {
+            "username": "rikanaap",
+            "password": "password",
+            "role": "SPV",
+            "createdEvent": [],
+            "assignedEvent": []
+        }
+    }
+}
