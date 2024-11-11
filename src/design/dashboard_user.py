@@ -1,1 +1,21 @@
 from utils.helper import generateTitle
+import inquirer
+
+def dashboard():
+    print(generateTitle("Dashboard", 14))
+    print("Welcome to the user's dashboard!!")
+
+    answer = inquirer.list_input("Go to...", choices=["Create New", "List All Created Event", "Logout"])
+    
+    if answer == "Create New":
+        print("hal create event")
+        # create_event() #hal. create event
+    elif answer == "List All Created Event":
+        print("hal created")
+        # list_all_created_event() #hal list all created event
+    elif answer == "Logout":
+        print("logout")# logout()
+    else:
+        print("Invalid choice. Please choose a valid option.")
+        dashboard()
+

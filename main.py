@@ -1,5 +1,6 @@
 # import src.design.login
 import src.design.test as testDesign
-
-testDesign.getAll()
-testDesign.queryTest()
+import src.design.dashboard_spv as dashboardSpv
+dashboardSpv.dashboard()
+# testDesign.getAll()
+# testDesign.queryTest()
