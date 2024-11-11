@@ -1,3 +1,2 @@
-import src.design.test as testDesign
-
-testDesign.getAll()
+# import src.design.login
+import src.design.register
