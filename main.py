@@ -4,7 +4,7 @@ import src.design.dashboard_spv as dashboardSpv
 dashboardSpv.dashboard
 import src.design.login as login
 
-login()
+login.login()
 # testDesign.getAll()
 # testDesign.queryTest()
 

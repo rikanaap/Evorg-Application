@@ -12,8 +12,8 @@ class User:
         # Check username ada di daabase ga
         if username in users:
             user = users[username]
-            # Validate the password
+            # Validasi password
             if user["password"] == password:
                 return {"success": True, "user": user}
-        return {"success": False, "message": "Invalid username or password"} 
+        return {"success": False, "message": "Username atau password salah!"} 
     

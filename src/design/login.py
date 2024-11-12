@@ -18,14 +18,19 @@ def login():
             print(f"Selamat datang, {user['username']}!")
             print(f"Role Anda: {user['role']}")
 
+            #cek role
             if user["role"].lower() == "spv":
                 svp_dashboard()
             else:
                 dashboard()
             break
+            
         else:
             print("Login gagal:", result["message"])
 
         time.sleep(1)
-        os.system("cls")
-
+        #refresh CLI jika akun salah
+        if os.name == 'nt':  # Windows
+            os.system("cls")
+        else:
+            os.system("clear")
