@@ -1,7 +1,8 @@
-from utils.helper import generateTitle
+from utils.helper import generateTitle, clear
 import inquirer
 
 def dashboard():
+    clear()
     print(generateTitle("Dashboard", 14))
     print("Welcome to the SPV's dashboard!!")
     

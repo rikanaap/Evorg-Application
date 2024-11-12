@@ -1,5 +1,5 @@
-from utils.helper import generateTitle
-import os, time
+from utils.helper import generateTitle, clear
+import time
 from src.service.user import User
 from src.design.dashboard_user import dashboard
 from src.design.dashboard_spv import dashboard as svp_dashboard
@@ -30,7 +30,4 @@ def login():
 
         time.sleep(1)
         #refresh CLI jika akun salah
-        if os.name == 'nt':  # Windows
-            os.system("cls")
-        else:
-            os.system("clear")
+        clear()
