@@ -9,10 +9,8 @@ class User:
     def validateUser(self, username, password):
         data = self.getAll()
         users = data.get("datas", {})
-        # Check username ada di daabase ga
         if username in users:
             user = users[username]
-            # Validasi password
             if user["password"] == password:
                 return {"success": True, "user": user}
         return {"success": False, "message": "Username atau password salah!"} 
