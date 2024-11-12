@@ -1,15 +1,31 @@
 from utils.helper import generateTitle
 import os, time
+from src.service.user import User
+from src.design.dashboard_user import dashboard
+from src.design.dashboard_spv import dashboard as svp_dashboard
 
-while True:
-    generateTitle("LOGIN", 14)
+def login():
+    userService = User()
+    while True:
+        generateTitle("LOGIN", 14)
+        username = input("Masukan username\t: ")
+        password = input("Masukan password\t: ")
+        
+        result = userService.validateUser(username, password)
 
-    username = input("Masukan username\t: ")
-    password = input("Masukan password\t: ")
+        if result["success"]:
+            user = result["user"]
+            print(f"Selamat datang, {user['username']}!")
+            print(f"Role Anda: {user['role']}")
 
-    if password != "xxx":
-        print("Password salah, Coba lagi!")
+            if user["role"].lower() == "spv":
+                svp_dashboard()
+            else:
+                dashboard()
+            break
+        else:
+            print("Login gagal:", result["message"])
+
         time.sleep(1)
         os.system("cls")
-    else:
-        break
+
