@@ -19,6 +19,5 @@ def dashboard():
         print("Invalid choice. Please choose a valid option.")
         dashboard()
 
-    # if __name__ == "__main__":
-    #     dashboard()
+
 
