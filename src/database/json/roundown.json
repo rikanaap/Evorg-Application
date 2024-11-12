@@ -1,24 +1,19 @@
 {
     "current_id": 0,
     "datas": {
-        "0-RNON": {
-            "current_id": 1,
-            "lists": [
-                {
-                    "id": 0,
-                    "roundown_name": "Pembukaan",
-                    "duration": 45,
-                    "description": "Moderator: Fauzan Mapiballi",
-                    "index_below": -1
-                },
-                {
-                    "id": 1,
-                    "roundown_name": "Pembacaan Doa",
-                    "duration": 15,
-                    "description": "Pembawa: Harmoni Natanael Simatupang",
-                    "index_below": 0 
-                }
-            ]
-        }
+        "0-RNON": [
+            {
+                "roundown_name": "Pembukaan",
+                "duration": 45,
+                "description": "Moderator: Fauzan Mapiballi\nTest",
+                "index_below": -1
+            },
+            {
+                "roundown_name": "Pembacaan Doa",
+                "duration": 15,
+                "description": "Pembawa: Harmoni Natanael Simatupang",
+                "index_below": 0
+            }
+        ]
     }
 }
