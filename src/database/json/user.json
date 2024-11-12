@@ -9,8 +9,6 @@
             "assignedEvent": []
         }
     },
-    "current_id": 1,
-    "datas": {
         "ahmad": {
             "username": "ahmad",
             "password": "password",
@@ -18,5 +16,4 @@
             "createdEvent": [],
             "assignedEvent": []
         }
-    }
 }
