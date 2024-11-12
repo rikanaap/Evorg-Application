@@ -1,5 +1,5 @@
 {
-    "current_id": 0,
+    "current_id": 1,
     "datas": {
         "rikanaap": {
             "username": "rikanaap",
@@ -7,10 +7,7 @@
             "role": "SPV",
             "createdEvent": [],
             "assignedEvent": []
-        }
-    },
-    "current_id": 1,
-    "datas": {
+        },
         "ahmad": {
             "username": "ahmad",
             "password": "password",
