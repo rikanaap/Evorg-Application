@@ -1,4 +1,3 @@
-import utils.local as localData
 from src.database.database import Database
 class User:
     def __init__(self):
@@ -8,13 +7,23 @@ class User:
         return self.databaseModel.getData()
        
     def validateUser(self, username, password):
+        from utils.local import setLocalUser
         data = self.getAll()
         users = data.get("datas", {})
         if username in users:
             user = users[username]
             if user["password"] == password:
-                localData.setLocalUser(username)
+                setLocalUser(username)
                 return {"success": True, "user": user}
         return {"success": False, "message": "Username atau password salah!"} 
+    
     def assignEvent(self, eventId):
-        data = self
+        from utils.local import getLocalUser
+        userData = getLocalUser()
+        assignedEventSet = list(userData.get('assignedEvent') or [])
+        if eventId in assignedEventSet: return userData
+
+        assignedEventSet.append(eventId)
+        userData['assignedEvent'] = assignedEventSet
+        self.databaseModel.updateData(userData['username'], userData)
+        return userData

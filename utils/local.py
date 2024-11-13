@@ -1,11 +1,11 @@
 from src.service.user import User
 
 # Local User
-userDatabase = User().databaseModel
-localUser =  userDatabase.getModel()
+_userDatabase = User().databaseModel
+localUser =  _userDatabase.getModel()
 def setLocalUser(username):
     global localUser 
-    localUser = userDatabase.checkIdentifier(username)
+    localUser = _userDatabase.checkIdentifier(username)
     if(not localUser): raise ValueError("No Username in User Database")
     return
 

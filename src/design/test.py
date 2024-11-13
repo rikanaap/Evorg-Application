@@ -1,11 +1,14 @@
 from src.service.roundown import Roundown
 from src.service.event import Event
+from src.service.user import User
+
 from tabulate import tabulate
 import inquirer
 import utils.local as localData
 
 _roundownService = Roundown()
 _eventService = Event()
+_userService = User()
 
 def getAll():
     roundownData = _roundownService.getAll() #Ambil data dari service
@@ -32,3 +35,7 @@ def createEVent():
 
 def testUser():
     return print(localData.getLocalUser())
+
+def assignEvent():
+    event_id = int(input("Masukan ID Event: "))
+    return _userService.assignEvent(event_id)

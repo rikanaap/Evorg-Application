@@ -2,6 +2,6 @@
     "username": "",
     "password": "",
     "role": "USER",
-    "createdEvent": [],
-    "assignedEvent": []
+    "createdEvent": {},
+    "assignedEvent": {}
 }

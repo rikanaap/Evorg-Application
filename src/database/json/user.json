@@ -6,7 +6,10 @@
             "password": "password",
             "role": "SPV",
             "createdEvent": [],
-            "assignedEvent": []
+            "assignedEvent": [
+                40,
+                50
+            ]
         },
         "ahmad": {
             "username": "ahmad",
