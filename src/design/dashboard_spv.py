@@ -10,7 +10,7 @@ def dashboard():
     
     if answer == "Create New":
         print("hal create event")
-        # create_event() #hal. create event
+        # createEvent() #hal. create event
     elif answer == "List All Created Event":
         print("hal created")
         # list_all_created_event() #hal list all created event
