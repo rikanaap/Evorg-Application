@@ -2,6 +2,7 @@ from src.service.roundown import Roundown
 from src.service.event import Event
 from tabulate import tabulate
 import inquirer
+import utils.local as localData
 
 _roundownService = Roundown()
 _eventService = Event()
@@ -28,3 +29,6 @@ def createEVent():
     datas['event_location'] = input("Lokasi Event\t: ")
 
     print(_eventService.createOne(datas))
+
+def testUser():
+    return print(localData.getLocalUser())

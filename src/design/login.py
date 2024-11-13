@@ -15,15 +15,15 @@ def login():
         result = userService.validateUser(username, password)
 
         if result["success"]:
-            user = result["user"]
-            print(f"Selamat datang, {user['username']}!")
-            print(f"Role Anda: {user['role']}")
+            # user = result["user"]
+            # print(f"Selamat datang, {user['username']}!")
+            # print(f"Role Anda: {user['role']}")
 
-            #cek role
-            if user["role"].lower() == "spv":
-                svp_dashboard()
-            else:
-                dashboard()
+            # #cek role
+            # if user["role"].lower() == "spv":
+            #     svp_dashboard()
+            # else:
+            #     dashboard()
             break
             
         else:
