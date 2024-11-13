@@ -5,6 +5,7 @@ from src.design.dashboard_user import dashboard
 from src.design.dashboard_spv import dashboard as svp_dashboard
 
 def login():
+    clear()
     userService = User()
     while True:
         generateTitle("LOGIN", 14)

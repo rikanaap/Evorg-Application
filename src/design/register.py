@@ -1,5 +1,5 @@
 import datetime
-from utils.helper import generateTitle
+from utils.helper import generateTitle, clear
 
 from utils.helper import generateTitle
 import time
@@ -17,6 +17,7 @@ class User:
 
 def register_participant():
     """Fungsi untuk registrasi peserta dengan username, password, dan role."""
+    clear()
     userService = User()
     generateTitle("Registrasi Peserta", 14)
 
@@ -41,4 +42,4 @@ def register_participant():
         print("Registrasi dibatalkan.")
         time.sleep(1)
 
-register_participant()
+#register_participant()
