@@ -27,3 +27,9 @@ class User:
         userData['assignedEvent'] = assignedEventSet
         self.databaseModel.updateData(userData['username'], userData)
         return userData
+    
+    def createUser(self,data):
+        return self.databaseModel.addData(data)
+    
+    def getUser(self,username):
+        return self.databaseModel.checkIdentifier(username)

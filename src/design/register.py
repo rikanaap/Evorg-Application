@@ -1,11 +1,12 @@
 import datetime
-from utils.helper import generateTitle, clear
+import hashlib
 
+from utils.helper import generateTitle, clear
 from utils.helper import generateTitle
 import time
 
 class User:
-    def __init__(self):
+    def __init__(self):        
         self.users = {}  
 
     def registerUser(self, username, password, role):
@@ -14,6 +15,11 @@ class User:
         
         self.users[username] = {"password": password, "role": role}
         return {"success": True, "message": "Registrasi berhasil."}
+    
+    enkripsi_password = hashlib.sha256(password.encode()).hexdigest()
+    self.users[username] = {"password": enkripsi_password, "role": role}
+    
+    return {"success": True, "message": "Registrasi berhasil."}
 
 def register_participant():
     """Fungsi untuk registrasi peserta dengan username, password, dan role."""
