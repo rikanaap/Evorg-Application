@@ -1,28 +1,43 @@
-import datetime
-from utils.helper import generateTitle, clear
-
-from utils.helper import generateTitle
+import hashlib
 import time
+
+# Pastikan untuk mengganti ini dengan implementasi yang sesuai jika Anda memiliki modul helper
+def generateTitle(title, length):
+    print(title.center(length, '='))
+
+def clear():
+    print("\n" * 100)  # Simulasi pembersihan layar
 
 class User:
     def __init__(self):
-        self.users = {}  
+        self.users = {}  # Menyimpan pengguna dalam dictionary
 
-    def registerUser(self, username, password, role):
+    def hash_password(self, password):
+        # Menghitung hash SHA-256 dari password
+        return hashlib.sha256(password.encode()).hexdigest()
+
+    def registerUser (self, username, password, role):
         if username in self.users:
             return {"success": False, "message": "Username sudah terdaftar."}
         
-        self.users[username] = {"password": password, "role": role}
+        # Enkripsi password
+        hashed_password = self.hash_password(password)
+        self.users[username] = {"password": hashed_password, "role": role}
         return {"success": True, "message": "Registrasi berhasil."}
+
+    def cekRegister(self, username):
+        if username in self.users:
+            return {"success": False, "message": "Username sudah terdaftar."}
+        return {"success": True, "message": "Username tersedia."}
 
 def register_participant():
     clear()
     userService = User()
-    generateTitle("Registrasi Peserta", 14)
+    generateTitle("Registrasi Peserta", 30)
 
     username = input("Masukkan Username\t: ")
 
-    # Cek apakah username sudah terdaftar di user.json
+    # Cek apakah username sudah terdaftar
     check = userService.cekRegister(username)
     if not check["success"]:
         print(check["message"])
@@ -32,24 +47,22 @@ def register_participant():
     password = input("Masukkan Password\t: ")
     role = input("Pilih Role (spv/user)\t: ").lower()
     
-    #validasi inputan role
+    # Validasi inputan role
     while role not in ["spv", "user"]:
         role = input("Role tidak valid. Masukkan 'spv' atau 'user'\t: ").lower()
 
     confirm = input("Apakah Anda yakin ingin mendaftar? (yes/no): ").lower()
     if confirm == "yes":
-        data = {
-            "username": username,
-            "password": password,
-            "role": role,
-        }
-        result = userService.createOne(data)
-        if result:
+        result = userService.registerUser (username, password, role)
+        if result["success"]:
             print("Registrasi berhasil.")
             time.sleep(1)
-            login()
+            # Panggil fungsi login di sini jika perlu
         else:
-            print("Terjadi kesalahan saat menyimpan data.")
+            print("Terjadi kesalahan saat menyimpan data:", result["message"])
     else:
         print("Registrasi dibatalkan.")
     time.sleep(1)
+
+# Menjalankan fungsi registrasi peserta
+register_participant()
