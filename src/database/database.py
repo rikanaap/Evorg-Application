@@ -80,3 +80,17 @@ class Database:
             else: return False
         self.__saveData__()
         return self
+        
+    def addUser(self, data, identifier=None):
+        identifier = data.get("username")
+        
+        identiferExist = self.checkIdentifier(identifier)
+        if self.identifier_unique and identiferExist: return False
+        
+        if self.model_idented: 
+            if identiferExist: self.DB_DATA['datas'][identifier] = []
+            self.DB_DATA['datas'][identifier].append({**self.DB_MODEL_DATA, **data})
+        else: self.DB_DATA['datas'][identifier] = {**self.DB_MODEL_DATA, **data }
+
+        self.__saveData__()
+        return self.checkIdentifier(identifier)

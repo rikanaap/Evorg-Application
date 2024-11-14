@@ -17,6 +17,20 @@
             "role": "user",
             "createdEvent": [],
             "assignedEvent": []
+        },
+        "juan": {
+            "username": "juan",
+            "password": "password",
+            "role": "spv",
+            "createdEvent": [],
+            "assignedEvent": []
+        },
+        "maly": {
+            "username": "maly",
+            "password": "password",
+            "role": "user",
+            "createdEvent": [],
+            "assignedEvent": []
         }
     }
 }
