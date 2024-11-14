@@ -3,31 +3,14 @@
     "datas": {
         "rikanaap": {
             "username": "rikanaap",
-            "password": "password",
-            "role": "SPV",
-            "createdEvent": [],
-            "assignedEvent": [
-                40,
-                50
-            ]
-        },
-        "ahmad": {
-            "username": "ahmad",
-            "password": "password",
-            "role": "user",
-            "createdEvent": [],
-            "assignedEvent": []
-        },
-        "juan": {
-            "username": "juan",
-            "password": "password",
+            "password": "5e884898da28047151d0e56f8dc6292773603d0d6aabbdd62a11ef721d1542d8",
             "role": "spv",
             "createdEvent": [],
             "assignedEvent": []
         },
-        "maly": {
-            "username": "maly",
-            "password": "password",
+        "ahmad": {
+            "username": "ahmad",
+            "password": "5e884898da28047151d0e56f8dc6292773603d0d6aabbdd62a11ef721d1542d8",
             "role": "user",
             "createdEvent": [],
             "assignedEvent": []
