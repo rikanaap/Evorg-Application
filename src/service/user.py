@@ -29,6 +29,7 @@ class User:
         userData['assignedEvent'] = assignedEventSet
         self.databaseModel.updateData(userData['username'], userData)
         return userData
+
     
     def createOne(self, data):
       return self.databaseModel.addUser(data)
@@ -40,3 +41,5 @@ class User:
     
     def hashPassword(self, password):
         return hashlib.sha256(password.encode()).hexdigest()
+
+

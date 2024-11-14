@@ -42,3 +42,5 @@ def register_participant():
     else:
         print("Registrasi dibatalkan.")
     time.sleep(1)
+
+
