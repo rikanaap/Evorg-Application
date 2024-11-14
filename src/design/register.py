@@ -1,9 +1,8 @@
 import datetime
 import hashlib
+import time
 
 from utils.helper import generateTitle, clear
-from utils.helper import generateTitle
-import time
 
 class User:
     def __init__(self):        
