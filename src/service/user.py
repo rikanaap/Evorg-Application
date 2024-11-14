@@ -27,3 +27,11 @@ class User:
         userData['assignedEvent'] = assignedEventSet
         self.databaseModel.updateData(userData['username'], userData)
         return userData
+    
+    def createOne(self, data):
+      return self.databaseModel.addUser(data)
+      
+    def cekRegister(self, username):
+      if self.databaseModel.checkIdentifier(username):
+        return {"success": False, "message": "Username sudah terdaftar."}
+      return {"success": True, "message": "Registrasi berhasil."}

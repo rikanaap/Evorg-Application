@@ -17,6 +17,7 @@ def dashboard():
         # list_all_created_event() #hal list all created event
     elif answer == "Logout":
         from src.design.first_page import first_page
+<<<<<<< HEAD
         while True:
                 confirm = input("Konfirmasi (yes/no): ").lower().strip()
                 if confirm in ["yes", "y"]:
@@ -27,6 +28,13 @@ def dashboard():
                 else:
                     print("Invalid input. Please enter 'yes' or 'no'.")
      
+=======
+        yakin =  input("Yakin akan logout? (yes/no): ")
+        if yakin == "yes":
+          first_page()
+        else:
+          dashboard()
+>>>>>>> 77a7769 (Ahmad | sinkron dara regis dengan .json dan login)
     else:
         print("Invalid choice. Please choose a valid option.")
         dashboard()
