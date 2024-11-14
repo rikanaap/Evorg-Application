@@ -1,4 +1,6 @@
 from src.database.database import Database
+import hashlib
+
 class User:
     def __init__(self):
         self.databaseModel = Database('user')
@@ -35,3 +37,6 @@ class User:
       if self.databaseModel.checkIdentifier(username):
         return {"success": False, "message": "Username sudah terdaftar."}
       return {"success": True, "message": "Registrasi berhasil."}
+    
+    def hashPassword(self, password):
+        return hashlib.sha256(password.encode()).hexdigest()

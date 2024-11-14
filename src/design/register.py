@@ -18,6 +18,7 @@ def register_participant():
         return register_participant()
 
     password = input("Masukkan Password\t: ")
+    enkripsi = userService.hashPassword(password)
     role = input("Pilih Role (spv/user)\t: ").lower()
     
     #validasi inputan role
@@ -28,7 +29,7 @@ def register_participant():
     if confirm == "yes":
         data = {
             "username": username,
-            "password": password,
+            "password": enkripsi,
             "role": role,
         }
         result = userService.createOne(data)

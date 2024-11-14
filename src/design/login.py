@@ -2,7 +2,7 @@ from utils.helper import generateTitle, clear
 import time
 from src.service.user import User
 from src.design.dashboard_user import dashboard
-from src.design.dashboard_spv import dashboard as svp_dashboard
+from src.design.dashboard_spv import dashboard as spv_dashboard
 
 def login():
     clear()
@@ -12,7 +12,9 @@ def login():
         username = input("Masukan username\t: ")
         password = input("Masukan password\t: ")
         
-        result = userService.validateUser(username, password)
+        enkripsi = userService.hashPassword(password)
+        
+        result = userService.validateUser(username, enkripsi)
 
         if result["success"]:
             user = result["user"]
@@ -21,7 +23,7 @@ def login():
 
             #cek role
             if user["role"].lower() == "spv":
-                svp_dashboard()
+                spv_dashboard()
             else:
                 dashboard()
             break
