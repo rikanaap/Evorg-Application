@@ -21,6 +21,20 @@
             "role": "user",
             "createdEvent": [],
             "assignedEvent": []
+        },
+        "bujang": {
+            "username": "bujang",
+            "password": "dfc25856b5c8d49e880faad01180ca40082fcfe41974aec22fd6bd4caf9ca777",
+            "role": "spv",
+            "createdEvent": [],
+            "assignedEvent": []
+        },
+        "juan": {
+            "username": "juan",
+            "password": "5e884898da28047151d0e56f8dc6292773603d0d6aabbdd62a11ef721d1542d8",
+            "role": "user",
+            "createdEvent": [],
+            "assignedEvent": []
         }
     }
 }
