@@ -4,6 +4,7 @@ from src.service.user import User
 from src.design.login import login
 
 def register_participant():
+
     clear()
     userService = User()
     generateTitle("Registrasi Peserta", 14)
