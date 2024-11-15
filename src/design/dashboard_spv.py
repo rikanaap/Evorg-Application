@@ -4,7 +4,7 @@ import inquirer
 
 def dashboard():
     clear()
-    print(generateTitle("Dashboard SPV", 14))
+    generateTitle("Dashboard SPV", 14)
     print("Welcome to the SPV's dashboard!!")
     
     answer = inquirer.list_input("Go to...", choices=["Create New", "List All Created Event", "Logout"])

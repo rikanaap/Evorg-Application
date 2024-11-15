@@ -6,7 +6,9 @@ class Event:
         self.serviceRoundown = Roundown()
         
     def getAll(self):
-        return self.databaseModel.getData()
+        databaseData = self.databaseModel.getData()
+        databaseData = databaseData['datas'].values()
+        return databaseData
     
     def createOne(self, data):
         data['roundown_identifier'] = f"{self.databaseModel.getCurrentId() + 1}-RNON"

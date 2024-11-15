@@ -7,3 +7,4 @@ class Roundown:
         databaseData = self.databaseModel.getData() #Ambil data raw dari databaseModel
         databaseData = databaseData['datas'].values() #Ini ma gegara data list tu bentuknya object, gwa ganti ke array
         return databaseData
+    
