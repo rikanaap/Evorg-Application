@@ -3,31 +3,35 @@
     "datas": {
         "rikanaap": {
             "username": "rikanaap",
-            "password": "password",
-            "role": "SPV",
+            "password": "5e884898da28047151d0e56f8dc6292773603d0d6aabbdd62a11ef721d1542d8",
+            "role": "spv",
             "createdEvent": [],
-            "assignedEvent": [
-                40,
-                50
-            ]
+            "assignedEvent": []
         },
         "ahmad": {
             "username": "ahmad",
-            "password": "password",
+            "password": "5e884898da28047151d0e56f8dc6292773603d0d6aabbdd62a11ef721d1542d8",
             "role": "user",
+            "createdEvent": [],
+            "assignedEvent": []
+        },
+        "Juan": {
+            "username": "Juan",
+            "password": "ed08c290d7e22f7bb324b15cbadce35b0b348564fd2d5f95752388d86d71bcca",
+            "role": "user",
+            "createdEvent": [],
+            "assignedEvent": []
+        },
+        "bujang": {
+            "username": "bujang",
+            "password": "dfc25856b5c8d49e880faad01180ca40082fcfe41974aec22fd6bd4caf9ca777",
+            "role": "spv",
             "createdEvent": [],
             "assignedEvent": []
         },
         "juan": {
             "username": "juan",
-            "password": "password",
-            "role": "spv",
-            "createdEvent": [],
-            "assignedEvent": []
-        },
-        "maly": {
-            "username": "maly",
-            "password": "password",
+            "password": "5e884898da28047151d0e56f8dc6292773603d0d6aabbdd62a11ef721d1542d8",
             "role": "user",
             "createdEvent": [],
             "assignedEvent": []
