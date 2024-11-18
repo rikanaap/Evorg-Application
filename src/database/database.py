@@ -32,8 +32,10 @@ class Database:
     def getModel(self):
         return self.DB_MODEL_DATA
     
-    def getData(self):
-        return self.DB_DATA
+    def getData(self, id=None):
+        if id:
+            return self.DB_DATA['datas'].get(id, None)
+        return self.DB_DATA['datas']
     
     def getCurrentId(self):
         return self.DB_DATA['current_id']

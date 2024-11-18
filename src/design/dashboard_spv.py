@@ -1,5 +1,6 @@
 from utils.helper import generateTitle, clear
 import inquirer
+# from src.design.create_event import createEvent
 # from src.design.logout import logout
 
 def dashboard():
@@ -11,7 +12,8 @@ def dashboard():
     
     if answer == "Create New":
         print("hal create event")
-        # createEvent() #hal. create event
+        from src.design.create_event import createEvent
+        createEvent.create_event() #hal. create event
     elif answer == "List All Created Event":
         print("hal created")
         # list_all_created_event() #hal list all created event

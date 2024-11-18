@@ -4,7 +4,13 @@ class Event:
     def __init__(self):
         self.databaseModel = Database('event')
         self.serviceRoundown = Roundown()
-        
+    
+    def getEventId(self, id):
+        return self.databaseModel.getData(id)
+    
+    def updateEvent(self, id, updates):
+        return self.databaseModel.updateData(id, updates)
+
     def getAll(self):
         databaseData = self.databaseModel.getData()
         databaseData = databaseData['datas'].values()

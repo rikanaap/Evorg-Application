@@ -18,7 +18,7 @@ def createEvent():
     datas['city'] = input("Kota Event\t\t\t: ")
     datas['event_location'] = input("Lokasi Event\t\t\t: ")
     datas['event_desc'] = input("Deskripsi Event\t\t\t: \n")
-
+    
     while True:
         confirm = input("Konfirmasi (yes/no) : ").strip().lower()
         if confirm in ['yes', 'y']:
