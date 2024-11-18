@@ -1,6 +1,5 @@
 from utils.helper import generateTitle, clear
 from utils.local import printLocalUser
-from src.design.createEvent import createEvent
 import inquirer
 # from src.design.create_event import createEvent
 # from src.design.logout import logout
