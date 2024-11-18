@@ -1,4 +1,6 @@
 from utils.helper import generateTitle, clear
+from utils.local import printLocalUser
+from src.design.createEvent import createEvent
 import inquirer
 # from src.design.logout import logout
 
@@ -6,11 +8,12 @@ def dashboard():
     clear()
     generateTitle("Dashboard SPV", 14)
     print("Welcome to the SPV's dashboard!!")
+    printLocalUser()
     
     answer = inquirer.list_input("Go to...", choices=["Create New", "List All Created Event", "Logout"])
     
     if answer == "Create New":
-        print("hal create event")
+        createEvent()
         # createEvent() #hal. create event
     elif answer == "List All Created Event":
         print("hal created")

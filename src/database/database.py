@@ -29,16 +29,25 @@ class Database:
         with open(self.file_path, 'w') as file:
             json.dump(self.DB_DATA, file, indent=4)
 
+    def __updateData__(self):
+        print("Updating data")
+        self.DB_DATA = self.__getRawDataMain__()
+        self.DB_MODEL_DATA = self.__getRawDataModel__()
+
     def getModel(self):
+        self.__updateData__()
         return self.DB_MODEL_DATA
     
     def getData(self):
+        self.__updateData__()
         return self.DB_DATA
     
     def getCurrentId(self):
+        self.__updateData__()
         return self.DB_DATA['current_id']
     
     def checkIdentifier(self, identifier):
+        self.__updateData__()
         return self.DB_DATA['datas'].get(identifier)
     
     def addData(self, data, identifier=None):
@@ -54,6 +63,7 @@ class Database:
         else: self.DB_DATA['datas'][identifier] = {**self.DB_MODEL_DATA, **data }
 
         self.__saveData__()
+        self.__updateData__()
         return self.checkIdentifier(identifier)
     
     def updateData(self, identifier, data, index=None):
@@ -64,7 +74,9 @@ class Database:
             if index is None or not (0 <= index < len(identifierData)): return False
             self.DB_DATA['datas'][identifier].insert(index, { **identifierData, **data })
         else: self.DB_DATA['datas'][identifier] = {**identifierData, **data }
+
         self.__saveData__()
+        self.__updateData__()
         return self.checkIdentifier(identifier)
     
     def deleteData(self, identifier, options={}):
@@ -78,19 +90,21 @@ class Database:
         if indexDelete is not None: 
             if 0 <= indexDelete < len(identifierData): self.DB_DATA['datas'][identifier].pop(indexDelete)
             else: return False
+        
         self.__saveData__()
+        self.__updateData__()
         return self
         
-    def addUser(self, data, identifier=None):
-        identifier = data.get("username")
+    # def addUser(self, data, identifier=None):
+    #     identifier = data.get("username")
         
-        identiferExist = self.checkIdentifier(identifier)
-        if self.identifier_unique and identiferExist: return False
+    #     identiferExist = self.checkIdentifier(identifier)
+    #     if self.identifier_unique and identiferExist: return False
         
-        if self.model_idented: 
-            if identiferExist: self.DB_DATA['datas'][identifier] = []
-            self.DB_DATA['datas'][identifier].append({**self.DB_MODEL_DATA, **data})
-        else: self.DB_DATA['datas'][identifier] = {**self.DB_MODEL_DATA, **data }
+    #     if self.model_idented: 
+    #         if identiferExist: self.DB_DATA['datas'][identifier] = []
+    #         self.DB_DATA['datas'][identifier].append({**self.DB_MODEL_DATA, **data})
+    #     else: self.DB_DATA['datas'][identifier] = {**self.DB_MODEL_DATA, **data }
 
-        self.__saveData__()
-        return self.checkIdentifier(identifier)
+    #     self.__saveData__()
+    #     return self.checkIdentifier(identifier)
