@@ -27,7 +27,7 @@ def updateEvent():
         input()
         return
     print(f"Event ditemukan: {event}")
-    event['event_name'] = input(f"Nama Event [{event['event_name']}]: ") 
+    event['event_name'] = input(f"Nama Event [{event['event_name']}]:  ") 
     event['event_date'] = input(f"Tanggal Event [{event['event_date']}]: ") 
     event['event_time'] = input(f"Waktu Event [{event['event_time']}]: ")
     event['city'] = input(f"Kota Event [{event['city']}]: ") 
