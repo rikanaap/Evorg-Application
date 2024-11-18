@@ -1,10 +1,10 @@
 {
-    "current_id": 1,
+    "current_id": 2,
     "datas": {
         "rikanaap": {
             "username": "rikanaap",
             "password": "5e884898da28047151d0e56f8dc6292773603d0d6aabbdd62a11ef721d1542d8",
-            "role": "spv",
+            "role": "user",
             "createdEvent": [],
             "assignedEvent": []
         },
@@ -33,6 +33,13 @@
             "username": "juan",
             "password": "5e884898da28047151d0e56f8dc6292773603d0d6aabbdd62a11ef721d1542d8",
             "role": "user",
+            "createdEvent": [],
+            "assignedEvent": []
+        },
+        "harmoni": {
+            "username": "harmoni",
+            "password": "5e884898da28047151d0e56f8dc6292773603d0d6aabbdd62a11ef721d1542d8",
+            "role": "spv",
             "createdEvent": [],
             "assignedEvent": []
         }

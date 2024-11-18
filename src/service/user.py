@@ -29,10 +29,10 @@ class User:
         userData['assignedEvent'] = assignedEventSet
         self.databaseModel.updateData(userData['username'], userData)
         return userData
-
+           
     
     def createOne(self, data):
-      return self.databaseModel.addUser(data)
+      return self.databaseModel.addData(data, data['username'])
       
     def cekRegister(self, username):
       if self.databaseModel.checkIdentifier(username):
