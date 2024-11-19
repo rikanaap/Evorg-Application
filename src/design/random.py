@@ -70,5 +70,5 @@ print(Fore.WHITE + """                                        __
 |V| _  _| _    |_  \/   |/  _  |       /  
 | |(_|(_|(/_   |_) /    |\ (/_ |  o    \__
 """)
-time.sleep(1)
+time.sleep(0.4)
 os.system("cls")

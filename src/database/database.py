@@ -30,7 +30,6 @@ class Database:
             json.dump(self.DB_DATA, file, indent=4)
 
     def __updateData__(self):
-        print("Updating data")
         self.DB_DATA = self.__getRawDataMain__()
         self.DB_MODEL_DATA = self.__getRawDataModel__()
 
