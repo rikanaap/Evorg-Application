@@ -16,6 +16,9 @@ class Event:
         databaseData = databaseData['datas'].values()
         return databaseData
     
+    def getRawAll(self):
+        return self.databaseModel.getData()
+    
     def getOne(self, id):
         return self.databaseModel.checkIdentifier(id)
     

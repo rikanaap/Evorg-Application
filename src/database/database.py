@@ -38,9 +38,8 @@ class Database:
         return self.DB_MODEL_DATA
     
     def getData(self, id=None):
-        if id:
-            return self.DB_DATA['datas'].get(id, None)
-        return self.DB_DATA['datas']
+        if id: return self.DB_DATA['datas'].get(id, None)
+        return self.DB_DATA
     # def getData(self):
     #     self.__updateData__()
     #     return self.DB_DATA

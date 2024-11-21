@@ -1,4 +1,7 @@
 import os
+import keyboard
+from colorama import Fore
+from tabulate import tabulate
 
 def generateTitle(nama, length):
     return print(f"{'=' * length} {nama} {'=' * length}")
