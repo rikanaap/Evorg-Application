@@ -8,4 +8,18 @@ def selectEvent():
     clear()
     selectedId = tableInputEvent()
     setLocalEvent(selectedId)
-    return print(getLocalEvent()) #Function detail 
+    return detailEvent()
+    
+def detailEvent():
+    clear()
+    event = getLocalEvent() 
+    
+    if not event:
+        print("Tidak ada event yang dipilih.")
+        return
+
+    print(generateTitle("Detail Event", 18))
+    print(f"Nama Event  : {event['event_name']}")
+    print(f"Jadwal      : {event['event_date']} {event['event_time']}")
+    print(f"Tempat      : {event['event_location']}, {event['city']}")
+    print(f"Deskripsi   : {event['event_desc']}")
