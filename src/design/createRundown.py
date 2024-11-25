@@ -8,10 +8,13 @@ def createRundown():
    
     event_id = getLocalEventId()
     setLocalEvent(str(event_id))
+   
     event_data = getLocalEvent()
     print(event_data)
+   
     generateTitle('Create rundown', 14)
     tableRoundown(str(event_id))
+    
     rundown_name = input("Rundown Name\t: ")    
     description = multilineInput("Description\t: ")
     duration = int(input("Duration\t: "))
