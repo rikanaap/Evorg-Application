@@ -2,9 +2,9 @@
     "current_id": 10,
     "datas": {
         "0": {
-            "roundown_identifier": "0-RNDN",
+            "roundown_identifier": "0-RNON",
             "event_name": "Come See Me",
-            "event_time": "16.00",
+            "event_time": "16:00",
             "event_desc": "Tempat: Depan Isola",
             "event_date": "2024-05-11",
             "city": "Bandung",

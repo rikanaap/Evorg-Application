@@ -13,3 +13,10 @@ class Roundown:
     
     def updateData(self, id, data):
         pass
+
+    def getRawAll(self):
+        return self.databaseModel.getData()
+    def createOne(self, id, data):
+        return self.databaseModel.addData(data, id)
+    
+    

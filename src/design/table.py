@@ -20,7 +20,7 @@ def tableCreatedEvent():
    eventData = _eventService.getAll() #Ambil data dari service
    tableData = [["Nama Event", "Jadwal", "Tempat", "Deskripsi"]]
    for data in eventData: tableData.append([data['event_name'], f"{data['event_date'] + ' ' + data['event_time']}", f"{data['event_location'] + ', ' + data['city']}", maxCharacter(data['event_desc'], maxCharLength)]) #Masukin ke tableData (variable yang bakal dipake buat tabulate)
-   return print(tabulate(tableData, headers="firstrow", tablefmt="github"))
+   return print(tabulate(tableData, headers="firstrow", tablefmt="github")) 
 
 def tableAssignedEvent():
    eventData = _eventService.getAll() #Ambil data dari service
@@ -75,3 +75,37 @@ def tableInputEvent(callback):
             clear()
             return callback()
         else: continue
+
+def tableInputRundown(callback,rd_id):
+  table = list(_roundownService.getOne(rd_id))
+  tableLength = len(table)
+  if tableLength < 1 or not table[0]: return False
+  
+  inputIndex, shownTable = 1,[["Pilih","Nama Kegiatan", "Jadwal", "Deskripsi"]]
+  for data in table:
+      shownTable.append([" ",data['roundown_name'],data['duration'], maxCharacter(data['description'], maxCharLength)])
+  shownTableLength = len(shownTable)
+
+  while True:
+    clear()
+    print("Use"+ Fore.GREEN + " esc " + Fore.WHITE + "button to go back")
+    shownTable[inputIndex][0] = Fore.GREEN + '>' + Fore.WHITE
+    print(tabulate(shownTable, headers="firstrow", tablefmt="github"))
+    
+    event = keyboard.read_event()
+    if event.event_type == "down":
+        if event.name == "down": 
+            shownTable[inputIndex][0] = " "
+            inputIndex = (inputIndex + 1) % shownTableLength if (inputIndex + 1 != 0) else 1
+            if inputIndex == 0: inputIndex = 1
+        elif event.name == "up": 
+            shownTable[inputIndex][0] = " "
+            inputIndex = (inputIndex - 1) % shownTableLength
+            if inputIndex == 0: inputIndex = 1
+        elif event.name == "enter":
+           return inputIndex - 1
+        elif event.name == "esc":
+            clear()
+            return callback()
+        else: continue
+

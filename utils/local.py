@@ -33,6 +33,8 @@ def setLocalEvent(id):
 
 def getLocalEvent(): return _localEvent
 
+def getLocalEventId(): return _localEventId
+
 def checkOneTimeLogin():
     globalData = _globalDatabase.getData()
     isLogged = globalData.get("oneTimeLogin")
