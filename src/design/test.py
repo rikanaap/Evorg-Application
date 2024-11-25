@@ -1,6 +1,7 @@
 from src.service.roundown import Roundown
 from src.service.event import Event
 from src.service.user import User
+from src.design.table import tableRoundown
 
 from tabulate import tabulate
 import inquirer
@@ -39,3 +40,6 @@ def testUser():
 def assignEvent():
     event_id = int(input("Masukan ID Event: "))
     return _userService.assignEvent(event_id)
+
+def generateRoundown():
+    tableRoundown()

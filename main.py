@@ -1,2 +1,3 @@
-from src.design.createdPage import createdEventPage
-createdEventPage()  
+from src.design.first_page import first_page
+
+first_page()

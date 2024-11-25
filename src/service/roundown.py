@@ -8,3 +8,5 @@ class Roundown:
         databaseData = databaseData['datas'].values() #Ini ma gegara data list tu bentuknya object, gwa ganti ke array
         return databaseData
     
+    def getOne(self, id):
+        return self.databaseModel.checkIdentifier(id)

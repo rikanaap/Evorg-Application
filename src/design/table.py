@@ -1,11 +1,15 @@
 from tabulate import tabulate
 from colorama import Fore
-from utils.helper import clear
+from utils.helper import clear, addDuration, maxCharacter
 from src.service.event import Event
+from src.service.roundown import Roundown
+from datetime import datetime
 import keyboard
 
-_eventService = Event()
+_eventService = Event() 
+_roundownService = Roundown()
 maxCharLength = 20
+
 def tableEvent():
     eventData = _eventService.getAll() #Ambil data dari service
     tableData = [["Nama Event", "Jadwal", "Tempat", "Deskripsi"]]
@@ -17,6 +21,22 @@ def tableCreatedEvent():
    tableData = [["Nama Event", "Jadwal", "Tempat", "Deskripsi"]]
    for data in eventData: tableData.append([data['event_name'], f"{data['event_date'] + ' ' + data['event_time']}", f"{data['event_location'] + ', ' + data['city']}", (data['event_desc'] if len(data['event_desc']) <= maxCharLength else data['event_desc'][0:maxCharLength - 2] + "...")]) #Masukin ke tableData (variable yang bakal dipake buat tabulate)
    return print(tabulate(tableData, headers="firstrow", tablefmt="github"))
+
+def tableRoundown(event_id):
+   eventData = _eventService.getOne(event_id)
+   roundownData = _roundownService.getOne(eventData.get("roundown_identifier"))
+
+   eventTime = datetime.strptime(eventData.get('event_time'), "%H:%M").time()
+   tableData = [["Nama Kegiatan", "Jadwal", "Deskripsi"]]
+   for data in roundownData:
+      rdDuration = data["duration"]
+      previousEventTime = eventTime
+      eventTime = addDuration(eventTime, rdDuration)
+
+      tableData.append([data['roundown_name'], f"{previousEventTime} - {eventTime} ({rdDuration}`)", maxCharacter(data['description'], maxCharLength)])
+   return print(tabulate(tableData, headers="firstrow", tablefmt="github"))
+
+
 def tableInputEvent():
   table = list(_eventService.getRawAll()['datas'].items())
   tableLength = len(table)

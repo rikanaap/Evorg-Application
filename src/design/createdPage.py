@@ -1,6 +1,8 @@
 from utils.helper import clear, generateTitle
 import inquirer
 from src.design.table import tableCreatedEvent
+from src.design.create_event import createEvent
+from src.design.select_event import selectEvent
  
 def display_event_list():
     

@@ -2,6 +2,7 @@ import os
 import keyboard
 from colorama import Fore
 from tabulate import tabulate
+from datetime import datetime, timedelta
 
 def generateTitle(nama, length):
     return print(f"{'=' * length} {nama} {'=' * length}")
@@ -20,3 +21,14 @@ def multilineInput(message):
       # if line.strip() == "": continue
       user_lines.append(line)
   return "\n".join(user_lines)
+
+def addDuration(refTime, duration):
+  time_object = refTime
+  if isinstance(refTime, str): time_object = datetime.strptime(refTime, "%H:%M").time()
+  datetime_object = datetime.combine(datetime.min, time_object)
+  updated_datetime = datetime_object + timedelta(minutes=duration)
+  refTime = updated_datetime.time()
+  return refTime
+
+def maxCharacter(str, max):
+   return str if len(str) <= max else str[0 : max - 2] + "..."
