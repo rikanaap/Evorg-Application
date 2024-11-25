@@ -1,4 +1,4 @@
-from utils.helper import generateTitle, clear
+from utils.helper import generateTitle, clear, logOut
 from utils.local import printLocalUser
 import inquirer
 # from src.design.create_event import createEvent
@@ -19,19 +19,7 @@ def dashboard():
     elif answer == "List All Created Event":
         print("hal created")
         # list_all_created_event() #hal list all created event
-    elif answer == "Logout":
-        from src.design.first_page import first_page
- 
-        while True:
-                confirm = input("Konfirmasi (yes/no): ").lower().strip()
-                if confirm in ["yes", "y"]:
-                    first_page()
-                    break
-                elif confirm in ["no", "n"]:
-                    break
-                else:
-                    print("Invalid input. Please enter 'yes' or 'no'.")
- 
+    elif answer == "Logout": return logOut()
     else:
         print("Invalid choice. Please choose a valid option.")
         dashboard()

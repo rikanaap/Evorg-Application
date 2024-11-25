@@ -1,6 +1,7 @@
-from utils.helper import generateTitle, clear
+from utils.helper import generateTitle, clear, logOut
 from utils.local import printLocalUser
 from src.design.list_event import listAllEvent
+from src.design.list_assigned_event import listAllAssignedEvent
 import inquirer
 
 def dashboard():
@@ -11,24 +12,9 @@ def dashboard():
 
     answer = inquirer.list_input("Go to...", choices=["List All Assigned Event", "List All Event", "Logout"])
     
-    if answer == "List All Assigned Event":
-        print("hal assigned event")
-        # create_event() #hal. create event
-    elif answer == "List All Event":
-         listAllEvent()
-    elif answer == "Logout":
-        from src.design.first_page import first_page
-  
-        while True:
-                confirm = input("Konfirmasi (yes/no): ").lower().strip()
-                if confirm in ["yes", "y"]:
-                    first_page()
-                    break
-                elif confirm in ["no", "n"]:
-                    break
-                else:
-                    print("Invalid input. Please enter 'yes' or 'no'.")
-     
+    if answer == "List All Assigned Event": return listAllAssignedEvent()
+    elif answer == "List All Event": return listAllEvent()
+    elif answer == "Logout": return logOut()
  
     else:
         print("Invalid choice. Please choose a valid option.")

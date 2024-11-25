@@ -1,9 +1,11 @@
 from src.service.user import User
 from src.service.event import Event
+from utils.global_db import GlobalDatabase
 
 # Local User
 _userDatabase = User().databaseModel
 _eventDatabase = Event().databaseModel
+_globalDatabase = GlobalDatabase()
 _localUser =  _userDatabase.getModel()
 _localEventId = 0
 _localEvent = _eventDatabase.getModel()
@@ -30,3 +32,17 @@ def setLocalEvent(id):
     return
 
 def getLocalEvent(): return _localEvent
+
+def checkOneTimeLogin():
+    globalData = _globalDatabase.getData()
+    isLogged = globalData.get("oneTimeLogin")
+    if not isLogged: return False
+
+    setLocalUser(globalData.get("user_username"))
+    return _localUser
+
+def emptyUserData():
+    global _localUser 
+    _localUser =  _userDatabase.getModel()
+    _globalDatabase.clearData()
+    return True

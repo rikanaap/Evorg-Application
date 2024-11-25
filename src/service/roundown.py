@@ -10,3 +10,6 @@ class Roundown:
     
     def getOne(self, id):
         return self.databaseModel.checkIdentifier(id)
+    
+    def updateData(self, id, data):
+        pass

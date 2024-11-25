@@ -3,6 +3,7 @@ import keyboard
 from colorama import Fore
 from tabulate import tabulate
 from datetime import datetime, timedelta
+from utils.local import emptyUserData
 
 def generateTitle(nama, length):
     return print(f"{'=' * length} {nama} {'=' * length}")
@@ -32,3 +33,16 @@ def addDuration(refTime, duration):
 
 def maxCharacter(str, max):
    return str if len(str) <= max else str[0 : max - 2] + "..."
+
+def logOut():
+  from src.design.first_page import first_page
+  while True:
+      confirm = input("Konfirmasi (yes/no): ").lower().strip()
+      if confirm in ["yes", "y"]:
+          emptyUserData()
+          first_page()
+          break
+      elif confirm in ["no", "n"]:
+          break
+      else:
+          print("Invalid input. Please enter 'yes' or 'no'.")

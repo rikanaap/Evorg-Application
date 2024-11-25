@@ -4,9 +4,9 @@ from src.design.table import tableInputEvent
 from utils.local import setLocalEvent, getLocalEvent
 _eventService = Event()
 
-def selectEvent():
+def selectEvent(cb):
     clear()
-    selectedId = tableInputEvent()
+    selectedId = tableInputEvent(cb)
     setLocalEvent(selectedId)
     return detailEvent()
     
