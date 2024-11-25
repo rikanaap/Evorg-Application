@@ -2,14 +2,14 @@ from utils.helper import clear, generateTitle
 import inquirer
 from src.design.table import tableCreatedEvent
 from src.design.create_event import createEvent
-from src.design.select_event import selectEvent
+from src.design.select_event import selectEvent 
  
 def display_event_list():
     
     
     clear()
 
-    generateTitle("List All Created Event", 14)
+    generateTitle("List All Created Event", 34)
 
     tableCreatedEvent()
         
