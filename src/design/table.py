@@ -12,6 +12,11 @@ def tableEvent():
     for data in eventData: tableData.append([data['event_name'], f"{data['event_date'] + ' ' + data['event_time']}", f"{data['event_location'] + ', ' + data['city']}", (data['event_desc'] if len(data['event_desc']) <= maxCharLength else data['event_desc'][0:maxCharLength - 2] + "...")]) #Masukin ke tableData (variable yang bakal dipake buat tabulate)
     return print(tabulate(tableData, headers="firstrow", tablefmt="github"))
 
+def tableCreatedEvent():
+   eventData = _eventService.getAll() #Ambil data dari service
+   tableData = [["Nama Event", "Jadwal", "Tempat", "Deskripsi"]]
+   for data in eventData: tableData.append([data['event_name'], f"{data['event_date'] + ' ' + data['event_time']}", f"{data['event_location'] + ', ' + data['city']}", (data['event_desc'] if len(data['event_desc']) <= maxCharLength else data['event_desc'][0:maxCharLength - 2] + "...")]) #Masukin ke tableData (variable yang bakal dipake buat tabulate)
+   return print(tabulate(tableData, headers="firstrow", tablefmt="github"))
 def tableInputEvent():
   table = list(_eventService.getRawAll()['datas'].items())
   tableLength = len(table)
