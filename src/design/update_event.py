@@ -1,4 +1,4 @@
-from utils.helper import generateTitle, clear
+from utils.helper import generateTitle, clear, multilineInput
 import inquirer
 from src.service.event import Event
 from src.design.dashboard_spv import dashboard
@@ -14,25 +14,25 @@ def updateEvent():
     print("\n")
 
     id_questions = [
-        inquirer.Text('id', message="Masukkan ID yang ingin diperbaharui: ")
+        inquirer.Text('roundown_identifier', message="Masukkan ID yang ingin diperbaharui ")
     ]
     id_answers = inquirer.prompt(id_questions)
     
-    id = id_answers['id']
+    roundown_identifier = id_answers['roundown_identifier']
     
-    event = _eventService.getEventId(id)
+    event_id, event = _eventService.getEventByRoundownIdentifier(roundown_identifier)
     
     if not event:
-        print(f"Event dengan id {id} tidak ditemukan, tekan enter untuk kembali ke menu utama")
+        print(f"Event dengan id {roundown_identifier} tidak ditemukan, tekan enter untuk kembali ke menu utama")
         input()
         return
     print(f"Event ditemukan: {event}")
-    event['event_name'] = input(f"Nama Event [{event['event_name']}]:  ") 
-    event['event_date'] = input(f"Tanggal Event [{event['event_date']}]: ") 
-    event['event_time'] = input(f"Waktu Event [{event['event_time']}]: ")
-    event['city'] = input(f"Kota Event [{event['city']}]: ") 
-    event['event_location'] = input(f"Lokasi Event [{event['event_location']}]: ") 
-    event['event_desc'] = input(f"Deskripsi Event [{event['event_desc']}]: \n") 
+    event['event_name'] = input(f"Nama Event [{event['event_name']}]\t:  ") 
+    event['event_date'] = input(f"Tanggal Event [{event['event_date']}]\t: ") 
+    event['event_time'] = input(f"Waktu Event [{event['event_time']}]\t: ")
+    event['city'] = input(f"Kota Event [{event['city']}]\t: ") 
+    event['event_location'] = input(f"Lokasi Event [{event['event_location']}]\t: ") 
+    event['event_desc'] = multilineInput(f"Deskripsi Event [{event['event_desc']}]: \n") 
     
     while True:
         confirm = input("Konfirmasi perubahan (yes/no): ").strip().lower()
@@ -40,7 +40,7 @@ def updateEvent():
             print("Perubahan dibatalkan.")
             return
         
-        if _eventService.updateEvent(id, event):
+        if _eventService.getEventByRoundownIdentifier(roundown_identifier, event):
             print("Event berhasil diperbarui.")
             redirectToSpvDashboard()
         else:

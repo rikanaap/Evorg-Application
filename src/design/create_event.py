@@ -7,7 +7,7 @@ _eventService = Event()
 def createEvent():
     from src.design.dashboard_spv import dashboard
 
-    clear(), generateTitle("Dashboard", 14)
+    clear(), generateTitle("Create Event", 14)
     datas = _eventService.databaseModel.DB_MODEL_DATA
     
     eventCreated = False
