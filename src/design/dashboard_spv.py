@@ -1,8 +1,7 @@
 from utils.helper import generateTitle, clear, logOut
 from utils.local import printLocalUser
 import inquirer
-# from src.design.create_event import createEvent
-# from src.design.logout import logout
+from src.design.createdPage import display_event_list
 
 def dashboard():
     clear()
@@ -17,8 +16,8 @@ def dashboard():
         from src.design.create_event import createEvent
         createEvent() #hal. create event
     elif answer == "List All Created Event":
-        print("hal created")
-        # list_all_created_event() #hal list all created event
+        return display_event_list()
+ 
     elif answer == "Logout": return logOut(callback=dashboard)
     else:
         print("Invalid choice. Please choose a valid option.")

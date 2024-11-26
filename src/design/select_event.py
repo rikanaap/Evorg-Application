@@ -4,6 +4,8 @@ from src.service.user import User
 from src.design.table import tableInputEvent
 from utils.local import setLocalEvent, getLocalEvent, getLocalUser, getLocalEventId
 import inquirer, time
+from src.design.update_event import updateEvent
+from src.design.createdPage import display_event_list
 
 _userService = User()
 _eventService = Event()
@@ -15,20 +17,30 @@ def selectEvent(callback=None):
     detailEvent()
     action(callback)
     
-def detailEvent():
+def detailEvent(callback=None):
     clear()
-    event = getLocalEvent() 
-    
+    event  = getLocalEvent()
+    # event_id = getLocalEventId()
     if not event:
         print("Tidak ada event yang dipilih.")
         return
-
+     
     generateTitle("Detail Event", 18)
     print(f"Nama Event  : {event['event_name']}")
     print(f"Jadwal      : {event['event_date']} {event['event_time']}")
     print(f"Tempat      : {event['event_location']}, {event['city']}")
     print(f"Deskripsi   : {event['event_desc']}")
+
+    answer = inquirer.list_input("Go to...", choices=["Update event", "Back"])
     
+    if answer == "Update event": 
+        return updateEvent()
+    elif answer == "Back": 
+        # selectEvent(callback)
+        pass
+    else:
+        print("Invalid choice. Please choose a valid option.")
+
 def action(callback=None):
     detailEvent()
     eventId = getLocalEventId()

@@ -23,16 +23,6 @@ class Event:
         data['roundown_identifier'] = f"{self.databaseModel.getCurrentId() + 1}-RNON"
         return self.databaseModel.addData(data)
     
-    def getEventByRoundownIdentifier(self, roundown_identifier):
-        all_events = self.databaseModel.getData().get('datas', {})
-        for event_id, event_data in all_events.items():
-            if event_data.get('roundown_identifier') == roundown_identifier:
-                return event_id, event_data 
-        return None, None
-    
-    def updateEvent(self, roundown_identifier, updates):
-        event_id, event = self.getEventByRundownIdentifier(roundown_identifier)
-        if not event:
-            return False 
-        return self.updateEvent(event_id, updates)
+    def updateEvent(self, event_id, updates):
+        return self.databaseModel.updateData(event_id, updates)
     

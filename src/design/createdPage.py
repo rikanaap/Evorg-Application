@@ -2,7 +2,7 @@ from utils.helper import clear, generateTitle
 import inquirer
 from src.design.table import tableCreatedEvent
 from src.design.create_event import createEvent
-from src.design.select_event import selectEvent 
+
  
 def display_event_list():
     
@@ -15,7 +15,9 @@ def display_event_list():
         
     option =inquirer.list_input("Options", choices=["Create Event", "Select Event"])
     if option == "Create Event":return createEvent()
-    elif option == "Select Event": return selectEvent()
+    elif option == "Select Event": 
+        from src.design.select_event import selectEvent 
+        return selectEvent()
 
     else:
         print("Invalid choice. Please choose a valid option.")
