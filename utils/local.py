@@ -16,7 +16,9 @@ def setLocalUser(username):
     if(not _localUser): raise ValueError("No Username in User Database")
     return
 
-def getLocalUser(): return _localUser
+def getLocalUser(): 
+    setLocalUser(_localUser['username'])
+    return _localUser
 def printLocalUser():
     global _localUser
     print(F"""Username : {_localUser['username']}

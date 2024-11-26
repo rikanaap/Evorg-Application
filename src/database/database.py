@@ -40,9 +40,14 @@ class Database:
     # def getData(self, id=None):
     #     if id: return self.DB_DATA['datas'].get(id, None)
     #     return self.DB_DATA
-    def getData(self):
+    def getData(self, assigned=[], created=[]):
         self.__updateData__()
-        return self.DB_DATA
+        dataFilter = self.DB_DATA
+        if (len(assigned) > 0) or (len(created) > 0):
+            dataFilter['datas'] = {}
+            for identifier in assigned: dataFilter['datas'][identifier] = self.checkIdentifier(identifier)
+            for identifier in created: dataFilter['datas'][identifier] = self.checkIdentifier(identifier)
+        return self.DB_DATA if len(dataFilter) < 1 else dataFilter
     
     def getCurrentId(self):
         self.__updateData__()

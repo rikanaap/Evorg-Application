@@ -8,13 +8,13 @@ class Event:
     def getEventId(self, roundown_identifier):
         return self.databaseModel.checkIdentifier(roundown_identifier)
     
-    def getAll(self):
-        databaseData = self.databaseModel.getData()
+    def getAll(self, assigned_array=[], created_array=[]):
+        databaseData = self.databaseModel.getData(assigned=assigned_array, created=created_array)
         databaseData = databaseData['datas'].values()
         return databaseData
     
-    def getRawAll(self):
-        return self.databaseModel.getData()
+    def getRawAll(self, assigned_array=[], created_array=[] ):
+        return self.databaseModel.getData(assigned=assigned_array, created=created_array)
     
     def getOne(self, id):
         return self.databaseModel.checkIdentifier(id)

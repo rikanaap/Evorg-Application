@@ -2,9 +2,11 @@ from src.service.roundown import Roundown
 from src.service.event import Event
 from src.service.user import User
 from src.design.table import tableRoundown
+from utils.helper import clear
+
 
 from tabulate import tabulate
-import inquirer
+import inquirer, time, keyboard
 import utils.local as localData
 
 _roundownService = Roundown()
@@ -41,5 +43,12 @@ def assignEvent():
     event_id = int(input("Masukan ID Event: "))
     return _userService.assignEvent(event_id)
 
-def generateRoundown():
-    tableRoundown()
+def generateRoundown(id, runFC):
+    while True:
+        clear()
+        runFC()
+        tableRoundown(id)
+        time.sleep(0.2)
+        if keyboard.is_pressed("esc"):
+            break
+
