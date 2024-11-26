@@ -2,7 +2,7 @@ from utils.helper import generateTitle, clear
 from src.service.event import Event
 from src.service.user import User
 from src.design.table import tableInputEvent
-from utils.local import setLocalEvent, getLocalEvent
+from utils.local import setLocalEvent, getLocalEvent, getLocalUser
 import inquirer, time
 
 _eventService = Event()
@@ -10,7 +10,8 @@ _userService = User()
 
 def selectAssignedEvent(callback=None):
     clear()
-    selectedId = tableInputEvent(selectAssignedEvent, assigned_only=True)
+    user = getLocalUser()
+    selectedId = tableInputEvent(selectAssignedEvent, assigned=user['assignedEvent'])
     setLocalEvent(selectedId)
     detailEvent()
     action(callback)

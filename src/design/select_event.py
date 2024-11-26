@@ -63,7 +63,7 @@ def assignEvent(callback=None):
                 if key in updatedUser['assignedEvent']:
                     print(f"Berhasil bergabung dengan event '{event['event_name']}'!")
                     time.sleep(3)
-                    selectEvent(callback)  
+                    action(callback)
                     break
                 else:
                     print("Gagal bergabung dengan event. Silakan coba lagi.")
@@ -72,7 +72,7 @@ def assignEvent(callback=None):
                 break
         elif confirm in ["no", "n"]:
             print("Anda memilih untuk tidak bergabung dengan event ini.")
-            selectEvent(callback)  
+            action(callback)  
             break
         else:
             print("Input tidak valid. Silakan coba lagi.")

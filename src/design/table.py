@@ -52,7 +52,29 @@ def tableInputEvent(callback, assigned=[], created=[]):
     for mainKey, data in table:
         shownTable.append([" ", data['event_name'], f"{data['event_date'] + ' ' + data['event_time']}", f"{data['event_location'] + ', ' + data['city']}", maxCharacter(data['event_desc'], maxCharLength)])
     shownTableLength = len(shownTable)
+    while True:
+      clear()
+      print("Use"+ Fore.GREEN + " esc " + Fore.WHITE + "button to go back")
+      shownTable[inputIndex][0] = Fore.GREEN + '>' + Fore.WHITE
+      print(tabulate(shownTable, headers="firstrow", tablefmt="github"))
+      
+      pilih = input("Pilih apa: ")
+      if pilih == "down": 
+          shownTable[inputIndex][0] = " "
+          inputIndex = (inputIndex + 1) % shownTableLength if (inputIndex + 1 != 0) else 1
+          if inputIndex == 0: inputIndex = 1
+      elif pilih == "up": 
+          shownTable[inputIndex][0] = " "
+          inputIndex = (inputIndex - 1) % shownTableLength
+          if inputIndex == 0: inputIndex = 1
+      elif pilih == "enter":
+         return table[inputIndex - 1][0]
+      elif pilih == "esc":
+          clear()
+          return callback()
+      else: continue
 
+"""
     while True:
         clear()
         print("Use"+ Fore.GREEN + " esc " + Fore.WHITE + "button to go back")
@@ -75,6 +97,7 @@ def tableInputEvent(callback, assigned=[], created=[]):
                 clear()
                 return callback()
             else: continue
+"""
 
 def tableInputRundown(callback,rd_id):
   table = list(_roundownService.getOne(rd_id))

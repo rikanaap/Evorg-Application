@@ -35,18 +35,20 @@ def addDuration(refTime, duration):
 def maxCharacter(str, max):
    return str if len(str) <= max else str[0 : max - 2] + "..."
 
-def logOut():
+def logOut(callback=None):
   from src.design.first_page import first_page
   while True:
       confirm = input("Konfirmasi (yes/no): ").lower().strip()
       if confirm in ["yes", "y"]:
-          emptyUserData()
-          first_page()
-          break
+        emptyUserData()
+        first_page()
+        break
       elif confirm in ["no", "n"]:
-          break
+        if callback:
+          callback()
+        break
       else:
-          print("Invalid input. Please enter 'yes' or 'no'.")
+        print("Invalid input. Please enter 'yes' or 'no'.")
 
 def generateRoundown(id, runFC):
     while True:
