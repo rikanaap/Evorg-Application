@@ -1,9 +1,10 @@
-import os
-import keyboard
+import os, keyboard, time
 from colorama import Fore
 from tabulate import tabulate
 from datetime import datetime, timedelta
 from utils.local import emptyUserData
+from src.design.table import tableRoundown
+
 
 def generateTitle(nama, length):
     return print(f"{'=' * length} {nama} {'=' * length}")
@@ -47,3 +48,11 @@ def logOut():
       else:
           print("Invalid input. Please enter 'yes' or 'no'.")
 
+def generateRoundown(id, runFC):
+    while True:
+        clear()
+        runFC()
+        tableRoundown(id)
+        time.sleep(0.2)
+        if keyboard.is_pressed("esc"):
+            break
