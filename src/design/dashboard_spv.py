@@ -19,7 +19,7 @@ def dashboard():
     elif answer == "List All Created Event":
         print("hal created")
         # list_all_created_event() #hal list all created event
-    elif answer == "Logout": return logOut()
+    elif answer == "Logout": return logOut(callback=dashboard)
     else:
         print("Invalid choice. Please choose a valid option.")
         dashboard()

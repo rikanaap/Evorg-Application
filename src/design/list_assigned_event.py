@@ -19,7 +19,7 @@ def listAllAssignedEvent():
       print("\nTidak ada event yang telah di-assign untuk pengguna ini.")
     
     if assignedEventIds:
-        tableTemplate.tableAssignedEvent() 
+        tableTemplate.tableAssignedEvent(assigned=user['assignedEvent']) 
         choices.insert(0, "Select Event")  
     
     answer = inquirer.list_input(

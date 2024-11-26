@@ -14,7 +14,7 @@ def dashboard():
     
     if answer == "List All Assigned Event": return listAllAssignedEvent()
     elif answer == "List All Event": return listAllEvent()
-    elif answer == "Logout": return logOut()
+    elif answer == "Logout": return logOut(callback=dashboard)
  
     else:
         print("Invalid choice. Please choose a valid option.")
