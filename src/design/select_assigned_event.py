@@ -1,8 +1,8 @@
-from utils.helper import generateTitle, clear
+from utils.helper import generateTitle, clear, generateRoundown
 from src.service.event import Event
 from src.service.user import User
 from src.design.table import tableInputEvent
-from utils.local import setLocalEvent, getLocalEvent, getLocalUser
+from utils.local import setLocalEvent, getLocalEvent, getLocalUser, getLocalEventId
 import inquirer, time
 
 _eventService = Event()
@@ -11,7 +11,7 @@ _userService = User()
 def selectAssignedEvent(callback=None):
     clear()
     user = getLocalUser()
-    selectedId = tableInputEvent(selectAssignedEvent, assigned=user['assignedEvent'])
+    selectedId = tableInputEvent(callback, assigned=user['assignedEvent'])
     setLocalEvent(selectedId)
     detailEvent()
     action(callback)
@@ -36,3 +36,15 @@ def action(callback=None):
 
     if answer == "Back":
       selectAssignedEvent(callback)
+    elif answer == "Lihat rundown":
+      showRundown()
+      
+def showRundown(callback=None):
+  clear()
+  generateTitle("Rundown Event", 18)
+  eventId = getLocalEventId()
+  generateRoundown(eventId)
+  answer = inquirer.list_input(
+        "Go to...", choices=["Back"])
+  if answer == "Back":
+    action(callback)

@@ -1,4 +1,4 @@
-from utils.helper import generateTitle, clear
+from utils.helper import generateTitle, clear, generateRoundown
 from src.service.event import Event
 from src.service.user import User
 from src.design.table import tableInputEvent
@@ -23,7 +23,7 @@ def detailEvent():
         print("Tidak ada event yang dipilih.")
         return
 
-    print(generateTitle("Detail Event", 18))
+    generateTitle("Detail Event", 18)
     print(f"Nama Event  : {event['event_name']}")
     print(f"Jadwal      : {event['event_date']} {event['event_time']}")
     print(f"Tempat      : {event['event_location']}, {event['city']}")
@@ -46,6 +46,8 @@ def action(callback=None):
 
     if answer == "Assign event":
         assignEvent(callback)
+    elif answer == "Lihat rundown":
+        showRundown()
     elif answer == "Back":
         selectEvent(callback)
 
@@ -77,3 +79,13 @@ def assignEvent(callback=None):
         else:
             print("Input tidak valid. Silakan coba lagi.")
   
+def showRundown(callback=None):
+  clear()
+  generateTitle("Rundown Event", 18)
+  eventId = getLocalEventId()
+  generateRoundown(eventId)
+  answer = inquirer.list_input(
+        "Go to...", choices=["Back"])
+  if answer == "Back":
+    action(callback)
+    

@@ -30,19 +30,21 @@ def tableAssignedEvent(assigned=[]):
    return print(tabulate(tableData, headers="firstrow", tablefmt="github"))
 
 def tableRoundown(event_id):
-   eventData = _eventService.getOne(event_id)
-   roundownData = _roundownService.getOne(eventData.get("roundown_identifier"))
+    eventData = _eventService.getOne(event_id)
+    roundownData = _roundownService.getOne(eventData.get("roundown_identifier"))
 
-   eventTime = datetime.strptime(eventData.get('event_time'), "%H:%M").time()
-   tableData = [["Nama Kegiatan", "Jadwal", "Deskripsi"]]
-   for data in roundownData:
-      rdDuration = data["duration"]
-      previousEventTime = eventTime
-      eventTime = addDuration(eventTime, rdDuration)
-
-      tableData.append([data['roundown_name'], f"{previousEventTime} - {eventTime} ({rdDuration}`)", maxCharacter(data['description'], maxCharLength)])
-   return print(tabulate(tableData, headers="firstrow", tablefmt="github"))
-
+    eventTime = datetime.strptime(eventData.get('event_time'), "%H:%M").time()
+    tableData = [["Nama Kegiatan", "Jadwal", "Deskripsi"]]
+    if isinstance(roundownData, list) and roundownData:
+     for data in roundownData:
+        rdDuration = data["duration"]
+        previousEventTime = eventTime
+        eventTime = addDuration(eventTime, rdDuration)
+  
+        tableData.append([data['roundown_name'], f"{previousEventTime} - {eventTime} ({rdDuration}`)", maxCharacter(data['description'], maxCharLength)])
+     return print(tabulate(tableData, headers="firstrow", tablefmt="github"))
+    else:
+      print("Tidak ada data rundown")
 def tableInputEvent(callback, assigned=[], created=[]):
     table = list(_eventService.getRawAll(assigned_array=assigned, created_array=created)['datas'].items())
     tableLength = len(table)
@@ -52,29 +54,6 @@ def tableInputEvent(callback, assigned=[], created=[]):
     for mainKey, data in table:
         shownTable.append([" ", data['event_name'], f"{data['event_date'] + ' ' + data['event_time']}", f"{data['event_location'] + ', ' + data['city']}", maxCharacter(data['event_desc'], maxCharLength)])
     shownTableLength = len(shownTable)
-    while True:
-      clear()
-      print("Use"+ Fore.GREEN + " esc " + Fore.WHITE + "button to go back")
-      shownTable[inputIndex][0] = Fore.GREEN + '>' + Fore.WHITE
-      print(tabulate(shownTable, headers="firstrow", tablefmt="github"))
-      
-      pilih = input("Pilih apa: ")
-      if pilih == "down": 
-          shownTable[inputIndex][0] = " "
-          inputIndex = (inputIndex + 1) % shownTableLength if (inputIndex + 1 != 0) else 1
-          if inputIndex == 0: inputIndex = 1
-      elif pilih == "up": 
-          shownTable[inputIndex][0] = " "
-          inputIndex = (inputIndex - 1) % shownTableLength
-          if inputIndex == 0: inputIndex = 1
-      elif pilih == "enter":
-         return table[inputIndex - 1][0]
-      elif pilih == "esc":
-          clear()
-          return callback()
-      else: continue
-
-"""
     while True:
         clear()
         print("Use"+ Fore.GREEN + " esc " + Fore.WHITE + "button to go back")
@@ -97,7 +76,6 @@ def tableInputEvent(callback, assigned=[], created=[]):
                 clear()
                 return callback()
             else: continue
-"""
 
 def tableInputRundown(callback,rd_id):
   table = list(_roundownService.getOne(rd_id))
