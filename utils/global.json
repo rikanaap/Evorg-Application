@@ -1,4 +1,4 @@
 {
-    "oneTimeLogin": true,
-    "user_username": "juan"
+    "oneTimeLogin": false,
+    "user_username": ""
 }

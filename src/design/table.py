@@ -5,6 +5,7 @@ from src.service.event import Event
 from src.service.roundown import Roundown
 from datetime import datetime
 import keyboard
+from utils.local import getLocalUser
 
 _eventService = Event() 
 _roundownService = Roundown()
@@ -23,10 +24,19 @@ def tableCreatedEvent():
    return print(tabulate(tableData, headers="firstrow", tablefmt="github")) 
 
 def tableAssignedEvent():
-   eventData = _eventService.getAll() #Ambil data dari service
-   tableData = [["Nama Event", "Jadwal", "Tempat", "Deskripsi"]]
-   for data in eventData: tableData.append([data['event_name'], f"{data['event_date'] + ' ' + data['event_time']}", f"{data['event_location'] + ', ' + data['city']}", maxCharacter(data['event_desc'], maxCharLength)]) #Masukin ke tableData (variable yang bakal dipake buat tabulate)
-   return print(tabulate(tableData, headers="firstrow", tablefmt="github"))
+  user = getLocalUser()
+  assignedEventIds = user.get('assignedEvent', [])
+
+  tableData = [["Nama Event", "Jadwal", "Tempat", "Deskripsi"]]
+    
+  eventDatabase = _eventService.getRawAll()  
+    
+  for eventId in assignedEventIds:
+    event = eventDatabase.get('datas',{}).get(eventId)
+    if event:
+      tableData.append([event['event_name'], f"{event['event_date'] + ' ' + event['event_time']}", f"{event['event_location'] + ', ' + event['city']}", maxCharacter(event['event_desc'], maxCharLength)]) 
+      
+  return print(tabulate(tableData, headers="firstrow", tablefmt="github"))
 
 def tableRoundown(event_id):
    eventData = _eventService.getOne(event_id)
@@ -42,9 +52,17 @@ def tableRoundown(event_id):
       tableData.append([data['roundown_name'], f"{previousEventTime} - {eventTime} ({rdDuration}`)", maxCharacter(data['description'], maxCharLength)])
    return print(tabulate(tableData, headers="firstrow", tablefmt="github"))
 
-
-def tableInputEvent(callback):
-  table = list(_eventService.getRawAll()['datas'].items())
+def tableInputEvent(callback, assigned_only=False):
+  if assigned_only:
+    user = getLocalUser()
+    assignedEventIds = user.get('assignedEvent', [])
+        # Filter hanya event yang di-assign
+    eventDatabase = _eventService.getRawAll()['datas']
+    table = [
+            (eventId, eventData) for eventId, eventData in eventDatabase.items() if eventId in assignedEventIds]
+  else:
+    table = list(_eventService.getRawAll()['datas'].items())
+    
   tableLength = len(table)
   if tableLength < 1 or not table[0]: return False
   
