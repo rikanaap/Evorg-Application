@@ -58,3 +58,8 @@ def generateRoundown(id, runFC=None):
         time.sleep(0.2)
         if keyboard.is_pressed("esc"):
             break
+
+def requiredInput(message):
+   while True:
+      answer = input(message)
+      if answer != "": return answer
