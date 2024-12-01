@@ -4,7 +4,7 @@ from utils.helper import generateTitle, clear, multilineInput
 
 _eventService = Event()
 
-def createEvent():
+def createEvent(callback):
     from src.design.dashboard_spv import dashboard
 
     clear(), generateTitle("Create Event", 14)
@@ -32,8 +32,7 @@ f"""Tolong Periksa apakah data sudah benar, data dibawah akan ditampilkan dan di
             confirm = input("\nKonfirmasi untuk membuat data? (yes/no) : ").strip().lower()
             if confirm in ['yes', 'y']:
                 _eventService.createOne(datas)
-                print("data berhasil dikirim")
-                dashboard()
+                callback()
                 eventCreated = True
                 break
             elif confirm in ['no', 'n']: 

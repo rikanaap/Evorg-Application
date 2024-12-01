@@ -13,7 +13,9 @@ _localEvent = _eventDatabase.getModel()
 def setLocalUser(username):
     global _localUser 
     _localUser = _userDatabase.checkIdentifier(username)
-    if(not _localUser): raise ValueError("No Username in User Database")
+    if(not _localUser): 
+        emptyUserData()
+        raise ValueError("No Username in User Database")
     return
 
 def getLocalUser(): 

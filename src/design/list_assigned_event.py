@@ -16,7 +16,7 @@ def listAllAssignedEvent():
     choices = ["Back to dashboard"]
     
     if not assignedEventIds:
-      print("\nTidak ada event yang telah di-assign untuk pengguna ini.")
+      print("\n\t\tTidak ada event yang telah di-assign untuk pengguna ini.")
     
     if assignedEventIds:
         tableTemplate.tableAssignedEvent(assigned=user['assignedEvent']) 

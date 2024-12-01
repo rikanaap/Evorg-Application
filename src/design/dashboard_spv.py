@@ -14,7 +14,7 @@ def dashboard():
     if answer == "Create New":
         print("hal create event")
         from src.design.create_event import createEvent
-        createEvent() #hal. create event
+        createEvent(dashboard) #hal. create event
     elif answer == "List All Created Event":
         return display_event_list()
  

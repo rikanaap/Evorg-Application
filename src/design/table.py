@@ -5,25 +5,24 @@ from src.service.event import Event
 from src.service.roundown import Roundown
 from datetime import datetime
 import keyboard
-from utils.local import getLocalUser
 
 _eventService = Event() 
 _roundownService = Roundown()
 maxCharLength = 20
 
-def tableEvent(assigned=[], created=[]):
+def tableEvent(assigned=None, created=None):
     eventData = _eventService.getAll(assigned_array=assigned, created_array=created) #Ambil data dari service
     tableData = [["Nama Event", "Jadwal", "Tempat", "Deskripsi"]]
     for data in eventData: tableData.append([data['event_name'], f"{data['event_date'] + ' ' + data['event_time']}", f"{data['event_location'] + ', ' + data['city']}", maxCharacter(data['event_desc'], maxCharLength)]) #Masukin ke tableData (variable yang bakal dipake buat tabulate)
     return print(tabulate(tableData, headers="firstrow", tablefmt="github"))
 
-def tableCreatedEvent(created=[]):
+def tableCreatedEvent(created=None):
    eventData = _eventService.getAll(created_array=created) #Ambil data dari service
    tableData = [["Nama Event", "Jadwal", "Tempat", "Deskripsi"]]
    for data in eventData: tableData.append([data['event_name'], f"{data['event_date'] + ' ' + data['event_time']}", f"{data['event_location'] + ', ' + data['city']}", maxCharacter(data['event_desc'], maxCharLength)]) #Masukin ke tableData (variable yang bakal dipake buat tabulate)
    return print(tabulate(tableData, headers="firstrow", tablefmt="github")) 
 
-def tableAssignedEvent(assigned=[]):
+def tableAssignedEvent(assigned=None):
    eventData = _eventService.getAll(assigned_array=assigned) #Ambil data dari service
    tableData = [["Nama Event", "Jadwal", "Tempat", "Deskripsi"]]
    for data in eventData: tableData.append([data['event_name'], f"{data['event_date'] + ' ' + data['event_time']}", f"{data['event_location'] + ', ' + data['city']}", maxCharacter(data['event_desc'], maxCharLength)]) #Masukin ke tableData (variable yang bakal dipake buat tabulate)
@@ -31,11 +30,11 @@ def tableAssignedEvent(assigned=[]):
 
 def tableRoundown(event_id):
     eventData = _eventService.getOne(event_id)
-    roundownData = _roundownService.getOne(eventData.get("roundown_identifier"))
+    roundownData = list(_roundownService.getOne(eventData.get("roundown_identifier")) or [])
 
     eventTime = datetime.strptime(eventData.get('event_time'), "%H:%M").time()
     tableData = [["Nama Kegiatan", "Jadwal", "Deskripsi"]]
-    if isinstance(roundownData, list) and roundownData:
+    if roundownData and roundownData:
      for data in roundownData:
         rdDuration = data["duration"]
         previousEventTime = eventTime
@@ -45,7 +44,8 @@ def tableRoundown(event_id):
      return print(tabulate(tableData, headers="firstrow", tablefmt="github"))
     else:
       print("Tidak ada data rundown")
-def tableInputEvent(callback, assigned=[], created=[]):
+
+def tableInputEvent(callback, assigned=None, created=None):
     table = list(_eventService.getRawAll(assigned_array=assigned, created_array=created)['datas'].items())
     tableLength = len(table)
     if tableLength < 1 or not table[0]: return False

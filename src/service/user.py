@@ -19,17 +19,18 @@ class User:
                 return {"success": True, "user": user}
         return {"success": False, "message": "Username atau password salah!"} 
     
-    def assignEvent(self, eventId):
+    def addEvent(self, eventId, identifier="assign"):
         from utils.local import getLocalUser
         userData = getLocalUser()
-        assignedEventSet = list(userData.get('assignedEvent') or [])
-        if eventId in assignedEventSet: return userData
+        identifierDb = "assignedEvent" if identifier == "assign" else "createdEvent"
+        tempSet = list(userData.get(identifierDb) or [])
+        if eventId in tempSet: return userData
 
-        assignedEventSet.append(eventId)
-        userData['assignedEvent'] = assignedEventSet
+        tempSet.append(eventId)
+        userData[identifierDb] = tempSet
         self.databaseModel.updateData(userData['username'], userData)
         return userData
-           
+
     
     def createOne(self, data):
       return self.databaseModel.addData(data, data['username'])

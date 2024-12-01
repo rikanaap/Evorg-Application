@@ -28,7 +28,7 @@ def createEVent():
     datas['event_name'] = input("Nama Event\t: ")
     datas['event_time'] = input("Waktu Event\t: ")
     datas['event_date'] = input("Tanggal Event\t:")
-    datas['event_desc'] = input("Deskripsi Event\t: \n")
+datas['event_desc'] = input("Deskripsi Event\t: \n")
     datas['city'] = input("Kota Event\t: ")
     datas['event_location'] = input("Lokasi Event\t: ")
 

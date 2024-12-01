@@ -36,13 +36,15 @@ class Database:
     def getModel(self):
         self.__updateData__()
         return self.DB_MODEL_DATA
-    def getData(self, assigned=[], created=[]):
+    def getData(self, assigned=None, created=None):
         self.__updateData__()
         dataFilter = self.DB_DATA
-        if (len(assigned) > 0) or (len(created) > 0):
+        if assigned is not None or created is not None:
             dataFilter['datas'] = {}
-            for identifier in assigned: dataFilter['datas'][identifier] = self.checkIdentifier(identifier)
-            for identifier in created: dataFilter['datas'][identifier] = self.checkIdentifier(identifier)
+            if assigned is not None: 
+                for identifier in assigned: dataFilter['datas'][identifier] = self.checkIdentifier(identifier)
+            if created is not None: 
+                for identifier in created: dataFilter['datas'][identifier] = self.checkIdentifier(identifier)
         return self.DB_DATA if len(dataFilter) < 1 else dataFilter
     
     def getCurrentId(self):
@@ -57,14 +59,15 @@ class Database:
         self.DB_DATA['current_id'] += 1
         identifier = identifier if identifier is not None else self.DB_DATA['current_id']
         
-        identiferExist = self.checkIdentifier(identifier)
+        identiferExist = self.checkIdentifier(str(identifier))
         if self.identifier_unique and identiferExist: return False
-        
-        if self.model_idented: 
-            if identiferExist: self.DB_DATA['datas'][identifier] = []
-            self.DB_DATA['datas'][identifier].append({**self.DB_MODEL_DATA, **data})
-        else: self.DB_DATA['datas'][identifier] = {**self.DB_MODEL_DATA, **data }
+        if data:
+            if self.model_idented: 
+                if identiferExist: self.DB_DATA['datas'][identifier] = []
+                self.DB_DATA['datas'][identifier].append({**self.DB_MODEL_DATA, **data})
+            else: self.DB_DATA['datas'][identifier] = {**self.DB_MODEL_DATA, **data }
 
+        self.DB_DATA['current_id'] += 1
         self.__saveData__()
         self.__updateData__()
         return self.checkIdentifier(identifier)
