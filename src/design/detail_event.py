@@ -1,12 +1,14 @@
 from utils.helper import clear, generateTitle, generateRoundown
 from utils.local import getLocalEvent, getLocalUser, getLocalEventId
 from src.design.update_event import updateEvent
+from src.design.detail_rundown import detailRundown
 from src.service.user import User
 
 import inquirer
 _userService = User()
 
-def detailEvent(callback):
+def detailEvent(callback, filter={"hide_assigned": False }):
+    removeAssignEvent = filter.get('hide_assigned')
     firstInput = True
     while True:
         clear()
@@ -21,7 +23,8 @@ def detailEvent(callback):
         print(f"Deskripsi   : {event['event_desc']}")
 
         print("")
-        choices = ["Assign Event", "Lihat Rundown", "Back"] if user['role'] != "spv" else ["Update Event", "Back"]
+        choices = ["Assign Event", "Lihat Rundown", "Back"] if user['role'] != "spv" else ["Update Event", "Detail Rundown", "Back"]
+        if user['role'] != "spv" and removeAssignEvent: choices.pop(0)
         answer = inquirer.list_input("Go to...", choices=choices)
         if not firstInput:
             if answer == "Update Event":
@@ -30,6 +33,8 @@ def detailEvent(callback):
                 assignEvent(lambda: detailEvent(callback))
                 clear()
                 return callback()
+            elif answer == "Detail Rundown":
+                return detailRundown(lambda: detailEvent(callback))
             elif answer == "Lihat Rundown":
                 generateRoundown(str(eventId), lambda: print("Press 'esc' to go back\n"))
             elif answer == "Back": 

@@ -75,12 +75,12 @@
         },
         "11": {
             "roundown_identifier": "11-RNON",
-            "event_name": "dansdnaknd",
-            "event_time": "dbaskd",
-            "event_desc": "",
-            "event_date": "dasbda",
-            "city": "dnsaknda",
-            "event_location": "bdsal"
+            "event_name": "Test rubah",
+            "event_time": "14:00",
+            "event_desc": "Cari tahu sendiri",
+            "event_date": "24-01-02",
+            "city": "Bandung",
+            "event_location": "Jalan Pegangsaaan 2"
         },
         "12": {
             "roundown_identifier": "12-RNON",

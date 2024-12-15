@@ -19,7 +19,3 @@ def dashboard():
     else:
         print("Invalid choice. Please choose a valid option.")
         dashboard()
-
-
- 
-

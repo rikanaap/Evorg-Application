@@ -15,14 +15,13 @@ def listAllAssignedEvent():
     
     choices = ["Back to dashboard"]
     
-    if not assignedEventIds:
-      print("\n\t\tTidak ada event yang telah di-assign untuk pengguna ini.")
-    
+    if not assignedEventIds: print("\n\t\tTidak ada event yang telah di-assign untuk pengguna ini.")
     if assignedEventIds:
         tableTemplate.tableAssignedEvent(assigned=user['assignedEvent']) 
         choices.insert(0, "Select Event")  
     
     answer = inquirer.list_input(
         "Next Action...", choices=choices)
+    
     if answer == "Back to dashboard": return dashboard()
     elif answer == "Select Event": return selectAssignedEvent()

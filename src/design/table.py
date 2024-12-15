@@ -57,6 +57,7 @@ def tableInputEvent(callback, assigned=None, created=None):
     while True:
         clear()
         print("Use"+ Fore.GREEN + " esc " + Fore.WHITE + "button to go back")
+
         shownTable[inputIndex][0] = Fore.GREEN + '>' + Fore.WHITE
         print(tabulate(shownTable, headers="firstrow", tablefmt="github"))
         
@@ -77,10 +78,11 @@ def tableInputEvent(callback, assigned=None, created=None):
                 return callback()
             else: continue
 
-def tableInputRundown(callback,rd_id):
-  table = list(_roundownService.getOne(rd_id))
+def tableInputRundown(callback, rd_id, notes="Please select rundown"):
+  table = list(_roundownService.getOne(rd_id) or []) 
   tableLength = len(table)
-  if tableLength < 1 or not table[0]: return False
+  if tableLength < 1 or not table[0]: return 0
+  
   
   inputIndex, shownTable = 1,[["Pilih","Nama Kegiatan", "Jadwal", "Deskripsi"]]
   for data in table:

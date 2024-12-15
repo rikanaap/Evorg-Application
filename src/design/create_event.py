@@ -7,11 +7,11 @@ _eventService = Event()
 def createEvent(callback):
     from src.design.dashboard_spv import dashboard
 
-    clear(), generateTitle("Create Event", 14)
     datas = _eventService.databaseModel.DB_MODEL_DATA
     
     eventCreated = False
     while not eventCreated:
+        clear(), generateTitle("Create Event", 14)
         datas['event_name'] = input("Nama Event\t\t\t: ")
         datas['event_date'] = input("Tanggal Event (YYYY-MM-DD)\t: ")  
         datas['event_time'] = input("Waktu Event (hh:mm)\t\t: ")
@@ -35,6 +35,10 @@ f"""Tolong Periksa apakah data sudah benar, data dibawah akan ditampilkan dan di
                 callback()
                 eventCreated = True
                 break
-            elif confirm in ['no', 'n']: 
-                clear()
-                break
+            else:
+                secondConfirm = input("Lanjut membuat data? (yes/no) : ").strip().lower()
+                if secondConfirm in ['yes', 'y']: break
+                else:
+                    callback()
+                    eventCreated = True
+                    break
