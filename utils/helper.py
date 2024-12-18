@@ -12,12 +12,13 @@ def clear():
   else: os.system("clear")
 
 def multilineInput(message):
-  print(message + ", ketik 'exit' untuk menyelesaikan:")
+  print(message + ", tekan 'ctrl' + 'enter untuk menyelesaikan:")
   
-  user_lines = []
+  user_lines = [] 
   while True:
+      if keyboard.is_pressed('ctrl') and keyboard.is_pressed('enter'): break
       line = input()
-      if line.lower() == "exit": break
+      # if line.lower() == "exit": break
       # if line.strip() == "": continue
       user_lines.append(line)
   return "\n".join(user_lines)
@@ -60,6 +61,9 @@ def generateRoundown(id, runFC=None):
             break
 
 def requiredInput(message):
+   first_time = True
    while True:
+      if first_time: print("\033[F\033[K", end="")
+      first_time = False
       answer = input(message)
       if answer != "": return answer

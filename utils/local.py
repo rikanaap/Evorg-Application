@@ -61,7 +61,7 @@ def setLocalRundown(id):
     global _localRundown
 
     _localRundownId = id
-    _localRundown = _rundownDatabase.checkIdentifier(id)
+    _localRundown = _rundownDatabase.checkIdentifier(id) or []
     return
 
 def getLocalRundown(): return _localRundown

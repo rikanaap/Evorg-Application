@@ -8,17 +8,16 @@ _rundownService = Roundown()
 
 def createRundown(callback, index_below):
     rundownId = getLocalRundownId()
-    rundownData = getLocalRundown()
+    # rundownData = getLocalRundown()
 
     clear(), generateTitle('Add New Rundown', 14)
     rundown_name = input("Rundown Name\t: ")    
-    description = input("Description\t: ")
     try:
-      duration = int(input("Duration (menit)\t: "))
+      duration = int(input("Duration (menit): "))
     except ValueError:
       print("Durasi harus berupa angka!")
       return callback()
-    index_below =  tableInputRundown(createRundown, rundownId)
+    description = multilineInput("Description\t: \nTulis deskripsi rundown")
 
     new_rundown = {
         "roundown_name": rundown_name, 

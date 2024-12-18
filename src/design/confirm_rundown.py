@@ -8,7 +8,7 @@ _roundownService = Roundown()
 
 def confirmRundown(ident, positive_cb, negative_cb, data):
 
-    # clear()
+    clear()
     generateTitle("Confirmation Create Event", 18)
     roundownData = getLocalRundown()
 
@@ -17,7 +17,7 @@ def confirmRundown(ident, positive_cb, negative_cb, data):
     tableData = [["Nama Kegiatan", "Jadwal", "Deskripsi"]]
     for data in roundownData:
         rdDuration = data["duration"]
-        tableData.append([data['roundown_name'],  ({rdDuration}), maxCharacter(data['description'], 20)])
+        tableData.append([data['roundown_name'],  rdDuration, maxCharacter(data['description'], 20)])
 
     print(tabulate(tableData, headers="firstrow", tablefmt="github"))
     print()
@@ -26,10 +26,13 @@ def confirmRundown(ident, positive_cb, negative_cb, data):
     print(f"{Fore.GREEN}Duration{Fore.WHITE}\t: {data['duration']}")
     print(f"{Fore.GREEN}Deskripsi{Fore.WHITE}\t:\n {data['description']}")
 
-    answer = requiredInput("Konfirmasi untuk membuat data? (yes/no) : ")
+    while True:
+        answer = requiredInput("Konfirmasi untuk membuat data? (yes/no) : ")
 
-    if answer == "yes" or answer == "y":
-        positive_cb()
-    else:
-        negative_cb()
+        if answer == "yes" or answer == "y":
+            positive_cb()
+            break
+        elif answer == "no" == "n":
+            negative_cb()
+            break
 

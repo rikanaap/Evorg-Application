@@ -1,5 +1,5 @@
 {
-    "current_id": 3,
+    "current_id": 6,
     "datas": {
         "rikanaap": {
             "username": "rikanaap",
@@ -66,6 +66,32 @@
             "assignedEvent": [
                 "1"
             ]
+        },
+        "Juann": {
+            "username": "Juann",
+            "password": "5e884898da28047151d0e56f8dc6292773603d0d6aabbdd62a11ef721d1542d8",
+            "role": "user",
+            "createdEvent": [],
+            "assignedEvent": []
+        },
+        "Juanz": {
+            "username": "Juanz",
+            "password": "5e884898da28047151d0e56f8dc6292773603d0d6aabbdd62a11ef721d1542d8",
+            "role": "user",
+            "createdEvent": [],
+            "assignedEvent": [
+                "0"
+            ]
+        },
+        "Joan": {
+            "username": "Joan",
+            "password": "5e884898da28047151d0e56f8dc6292773603d0d6aabbdd62a11ef721d1542d8",
+            "role": "spv",
+            "createdEvent": [
+                "15",
+                "16"
+            ],
+            "assignedEvent": []
         }
     }
 }
