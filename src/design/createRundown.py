@@ -28,16 +28,13 @@ def createRundown(callback, index_below):
     }
 
     def on_create_success():
-      result = _rundownService.createOne(rundownId, new_rundown)
-      if result:
-        print("Rundown successfully created!")
-      else:
-        print("Failed to create rundown.")
+      _rundownService.createOne(rundownId, new_rundown)
+      callback()
         
     def on_create_failure():
-      print("Rundown creation cancelled!")
+       callback()
 
     confirmRundown("create"
-     , on_create_success()
+     , on_create_success
      , on_create_failure
      , data=new_rundown)

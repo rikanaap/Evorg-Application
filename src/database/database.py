@@ -8,7 +8,7 @@ class Database:
         self.DB_MODEL_DATA = self.__getRawDataModel__()
         if not self.DB_DATA or not self.DB_MODEL_DATA: raise ValueError("Failed to load database or model data.")
 
-        self.model_idented = options.get('indent_model', False)
+        self.model_idented = options.get('model_idented', False)
         self.identifier_unique = options.get('identifier_unique', True)
 
     def __getRawDataMain__(self):
@@ -61,9 +61,10 @@ class Database:
         
         identiferExist = self.checkIdentifier(str(identifier))
         if self.identifier_unique and identiferExist: return False
+        print(data, self.model_idented)
         if data:
             if self.model_idented: 
-                if identiferExist: self.DB_DATA['datas'][identifier] = []
+                if not identiferExist: self.DB_DATA['datas'][identifier] = []
                 self.DB_DATA['datas'][identifier].append({**self.DB_MODEL_DATA, **data})
             else: self.DB_DATA['datas'][identifier] = {**self.DB_MODEL_DATA, **data }
 

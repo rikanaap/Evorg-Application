@@ -8,7 +8,7 @@ _roundownService = Roundown()
 
 def confirmRundown(ident, positive_cb, negative_cb, data):
 
-    clear()
+    # clear()
     generateTitle("Confirmation Create Event", 18)
     roundownData = getLocalRundown()
 

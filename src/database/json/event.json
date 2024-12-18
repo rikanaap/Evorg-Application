@@ -84,12 +84,12 @@
         },
         "12": {
             "roundown_identifier": "12-RNON",
-            "event_name": "dnasjdnasl",
-            "event_time": "dsndad",
-            "event_desc": "dasbdaskd",
-            "event_date": "dasjbda",
+            "event_name": "Event baru",
+            "event_time": "23:59",
+            "event_desc": "dasbdaskddsa",
+            "event_date": "24-01-01",
             "city": "nsda",
-            "event_location": "dasdasjdna"
+            "event_location": "dasda"
         },
         "13": {
             "roundown_identifier": "13-RNON",

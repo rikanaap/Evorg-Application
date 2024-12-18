@@ -23,8 +23,7 @@ def detailRundown(callback):
         print("")
 
         choices = ["Tambah Rundown", "Edit Rundown", "Back"]
-        if event.get('')
-
+        # if event.get(''):
         answer = inquirer.list_input("Go to...", choices=choices)
         if answer == "Tambah Rundown":
             tableIndex = tableInputRundown(lambda: detailRundown(callback), rundownId, "Pilih posisi rundown akan berada dibawah...")

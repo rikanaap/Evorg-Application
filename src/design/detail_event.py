@@ -7,7 +7,8 @@ from src.service.user import User
 import inquirer
 _userService = User()
 
-def detailEvent(callback, filter={"hide_assigned": False }):
+def detailEvent(callback, filter={"hide_assigned": False }, shouldRecurse=False):
+    if shouldRecurse: return callback()
     removeAssignEvent = filter.get('hide_assigned')
     firstInput = True
     while True:
@@ -28,13 +29,13 @@ def detailEvent(callback, filter={"hide_assigned": False }):
         answer = inquirer.list_input("Go to...", choices=choices)
         if not firstInput:
             if answer == "Update Event":
-                return updateEvent(lambda: detailEvent(callback))
+                return updateEvent(lambda: detailEvent(callback, shouldRecurse=True))
             elif answer == "Assign Event":
-                assignEvent(lambda: detailEvent(callback))
+                assignEvent(lambda: detailEvent(callback, shouldRecurse=True))
                 clear()
                 return callback()
             elif answer == "Detail Rundown":
-                return detailRundown(lambda: detailEvent(callback))
+                return detailRundown(lambda: detailEvent(callback, shouldRecurse=True))
             elif answer == "Lihat Rundown":
                 generateRoundown(str(eventId), lambda: print("Press 'esc' to go back\n"))
             elif answer == "Back": 
