@@ -67,3 +67,8 @@ def requiredInput(message):
       first_time = False
       answer = input(message)
       if answer != "": return answer
+
+def confirmation(key):
+  print(f"Tekan apapun untuk melanjutkan, tekan {key} untuk kembali")
+  if keyboard.read_event().name == key: return False
+  return True

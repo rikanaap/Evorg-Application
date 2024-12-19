@@ -5,7 +5,7 @@ from src.design.table import tableRoundown, tableInputRundown
 from src.design.createRundown import createRundown
 from src.design.updateRundown import updateRundown
 
-import inquirer
+import inquirer, keyboard
 _userService = User()
 
 def detailRundown(callback):
@@ -26,11 +26,15 @@ def detailRundown(callback):
         # if event.get(''):
         answer = inquirer.list_input("Go to...", choices=choices)
         if answer == "Tambah Rundown":
+            while keyboard.is_pressed("enter"): pass
             tableIndex = tableInputRundown(lambda: detailRundown(callback), rundownId, "Pilih posisi rundown akan berada dibawah...")
-            return createRundown(callback, tableIndex)
+            while keyboard.is_pressed("enter"): pass
+            return createRundown(lambda: detailRundown(callback), tableIndex)
         elif answer == "Edit Rundown":
+            while keyboard.is_pressed("enter"): pass
             tableIndex = tableInputRundown(lambda: detailRundown(callback), rundownId, "Pilih rundown yang akan dirubah...")
-            return updateRundown(callback, tableIndex)
+            while keyboard.is_pressed("enter"): pass
+            return updateRundown(lambda: detailRundown(callback), tableIndex)
         elif answer == "Back": 
             clear()
             return callback()
