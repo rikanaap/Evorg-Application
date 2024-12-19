@@ -4,7 +4,7 @@ from utils.helper import clear, addDuration, maxCharacter
 from src.service.event import Event
 from src.service.roundown import Roundown
 from datetime import datetime
-import keyboard
+import keyboard, time
 
 _eventService = Event() 
 _roundownService = Roundown()
@@ -83,7 +83,6 @@ def tableInputRundown(callback, rd_id, notes="Please select rundown"):
   tableLength = len(table)
   if tableLength < 1 or not table[0]: return 0
   
-  
   inputIndex, shownTable = 1,[["Pilih","Nama Kegiatan", "Jadwal", "Deskripsi"]]
   for data in table:
       shownTable.append([" ",data['roundown_name'],data['duration'], maxCharacter(data['description'], maxCharLength)])
@@ -111,4 +110,3 @@ def tableInputRundown(callback, rd_id, notes="Please select rundown"):
             clear()
             return callback()
         else: continue
-

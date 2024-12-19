@@ -12,12 +12,12 @@ def confirmRundown(ident, positive_cb, negative_cb, data):
     generateTitle("Confirmation Create Event", 18)
     roundownData = getLocalRundown()
 
-    if ident == "create" : roundownData.insert(data["index_below"], data)
+    if ident == "create" : roundownData.insert(data["index_below"] + 1, data)
     #TODO: When the identifier is "update" change the data in index_below
     tableData = [["Nama Kegiatan", "Jadwal", "Deskripsi"]]
-    for data in roundownData:
-        rdDuration = data["duration"]
-        tableData.append([data['roundown_name'],  rdDuration, maxCharacter(data['description'], 20)])
+    for rundownData in roundownData:
+        rdDuration = rundownData["duration"]
+        tableData.append([rundownData['roundown_name'],  rdDuration, maxCharacter(rundownData['description'].split('\n')[0], 20)])
 
     print(tabulate(tableData, headers="firstrow", tablefmt="github"))
     print()
@@ -29,10 +29,5 @@ def confirmRundown(ident, positive_cb, negative_cb, data):
     while True:
         answer = requiredInput("Konfirmasi untuk membuat data? (yes/no) : ")
 
-        if answer == "yes" or answer == "y":
-            positive_cb()
-            break
-        elif answer == "no" == "n":
-            negative_cb()
-            break
-
+        if answer == "yes" or answer == "y": return positive_cb()
+        elif answer == "no" == "n": return negative_cb()
