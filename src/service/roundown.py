@@ -12,7 +12,9 @@ class Roundown:
         return self.databaseModel.checkIdentifier(id)
     
     def updateData(self, id, data):
-        pass
+         indexData = data['index_below']
+         del data['index_below']
+         return self.databaseModel.updateData(id, data, indexData)
 
     def getRawAll(self):
         return self.databaseModel.getData()
