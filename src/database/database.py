@@ -1,6 +1,6 @@
 import json
 class Database:
-    def _init_(self, file_name, options={}):
+    def __init__(self, file_name, options={}):
         self.file_path = f"src/database/json/{file_name}.json"
         self.file_model_path = f"src/database/json/models/{file_name}.json"
 

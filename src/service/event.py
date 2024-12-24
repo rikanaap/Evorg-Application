@@ -2,7 +2,7 @@ from src.database.database import Database
 from src.service.roundown import Roundown
 from src.service.user import User
 class Event:
-    def _init_(self):
+    def __init__(self):
         self.databaseModel = Database('event')
         self.serviceRoundown = Roundown()
         self.serviceUser = User()
