@@ -35,7 +35,7 @@ def tableRoundown(event_id, highlightTime=None):
     currentTime = datetime.now().time()
     eventTime = datetime.strptime(eventData.get('event_time'), "%H:%M").time()
     tableData = [["Nama Kegiatan", "Jadwal", "Deskripsi"]]
-    if highlightTime: tableData.append("X")
+    if highlightTime: tableData[0].append("X")
     if roundownData and roundownData:
      for data in roundownData:
         rdDuration = data["duration"]

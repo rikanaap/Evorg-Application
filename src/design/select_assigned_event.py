@@ -16,4 +16,3 @@ def selectAssignedEvent():
     selectedId = tableInputEvent(dashboard, assigned=user['assignedEvent'])
     setLocalEvent(selectedId)
     detailEvent(selectAssignedEvent, { "hide_assigned": True})
-    

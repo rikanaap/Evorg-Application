@@ -4,40 +4,40 @@ class Database:
         self.file_path = f"src/database/json/{file_name}.json"
         self.file_model_path = f"src/database/json/models/{file_name}.json"
 
-        self.DB_DATA = self._getRawDataMain_()
-        self.DB_MODEL_DATA = self._getRawDataModel_()
+        self.DB_DATA = self.__getRawDataMain__()
+        self.DB_MODEL_DATA = self.__getRawDataModel__()
         if not self.DB_DATA or not self.DB_MODEL_DATA: raise ValueError("Failed to load database or model data.")
 
         self.model_idented = options.get('model_idented', False)
         self.identifier_unique = options.get('identifier_unique', True)
 
-    def _getRawDataMain_(self):
+    def __getRawDataMain__(self):
         try:
             with open(self.file_path, 'r') as file:
                 return json.load(file)
         except (FileNotFoundError, json.JSONDecodeError):
             return False
     
-    def _getRawDataModel_(self):
+    def __getRawDataModel__(self):
         try:
             with open(self.file_model_path, 'r') as file:
                 return json.load(file)
         except (FileNotFoundError, json.JSONDecodeError):
             return False
         
-    def _saveData_(self):
+    def __saveData__(self):
         with open(self.file_path, 'w') as file:
             json.dump(self.DB_DATA, file, indent=4)
 
-    def _updateData_(self):
-        self.DB_DATA = self._getRawDataMain_()
-        self.DB_MODEL_DATA = self._getRawDataModel_()
+    def __updateData__(self):
+        self.DB_DATA = self.__getRawDataMain__()
+        self.DB_MODEL_DATA = self.__getRawDataModel__()
 
     def getModel(self):
-        self._updateData_()
+        self.__updateData__()
         return self.DB_MODEL_DATA
     def getData(self, assigned=None, created=None):
-        self._updateData_()
+        self.__updateData__()
         dataFilter = self.DB_DATA
         if assigned is not None or created is not None:
             dataFilter['datas'] = {}
@@ -48,11 +48,11 @@ class Database:
         return self.DB_DATA if len(dataFilter) < 1 else dataFilter
     
     def getCurrentId(self):
-        self._updateData_()
+        self.__updateData__()
         return self.DB_DATA['current_id']
     
     def checkIdentifier(self, identifier):
-        self._updateData_()
+        self.__updateData__()
         return self.DB_DATA['datas'].get(identifier)
     
     def addData(self, data, identifier=None):
@@ -69,8 +69,8 @@ class Database:
             else: self.DB_DATA['datas'][identifier] = {**self.DB_MODEL_DATA, **data }
 
         self.DB_DATA['current_id'] += 1
-        self._saveData_()
-        self._updateData_()
+        self.__saveData__()
+        self.__updateData__()
         return self.checkIdentifier(identifier)
     
     def updateData(self, identifier, data, index=None):
@@ -82,8 +82,8 @@ class Database:
             self.DB_DATA['datas'][identifier][index] = data
         else: self.DB_DATA['datas'][identifier] = {**identifierData, **data }
 
-        self._saveData_()
-        self._updateData_()
+        self.__saveData__()
+        self.__updateData__()
         return self.checkIdentifier(identifier)
     
     def deleteData(self, identifier, options={}):
@@ -98,6 +98,6 @@ class Database:
             if 0 <= indexDelete < len(identifierData): self.DB_DATA['datas'][identifier].pop(indexDelete)
             else: return False
         
-        self._saveData_()
-        self._updateData_()
+        self.__saveData__()
+        self.__updateData__()
         return self

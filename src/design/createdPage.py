@@ -32,3 +32,6 @@ def display_event_list():
         else:
             print("Invalid choice. Please choose a valid option.")
             display_event_list()
+
+
+
