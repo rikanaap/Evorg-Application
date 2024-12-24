@@ -1,4 +1,4 @@
-from utils.helper import generateTitle, multilineInput, clear, confirmation
+from utils.helper import generateTitle, multilineInput, clear, confirmation, requiredInput, intInput
 from src.design.table import tableRoundown, tableInputRundown
 from utils.local import getLocalRundown, getLocalRundownId
 from src.service.roundown import Roundown
@@ -12,12 +12,10 @@ def createRundown(callback, index_below):
     clear(), generateTitle('Add New Rundown', 14)
     confirm = confirmation('esc')
     if not confirm: return callback()
-    try:
-      rundown_name = input("Rundown Name\t: ")
-      duration = int(input("Duration (menit): "))
-    except ValueError:
-      print("Durasi harus berupa angka!")
-      return createRundown(callback, index_below)
+
+    keyboard.unblock_key('enter')
+    rundown_name = requiredInput("Rundown Name\t: ")
+    duration = intInput("Duration (menit): ")
     description = multilineInput("Description\t: \nTulis deskripsi rundown")
 
     new_rundown = {

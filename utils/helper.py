@@ -51,24 +51,62 @@ def logOut(callback=None):
 
 def generateRoundown(id, runFC=None):
     from src.design.table import tableRoundown
+    from src.service.event import Event
+    _eventService = Event()
     while True:
+        eventStartTime = _eventService.getOne(id)['event_time']
         clear()
         if runFC:
           runFC()
-        tableRoundown(id)
+        print(f'''{Fore.GREEN}Jam Sekarang : {Fore.WHITE}{str(datetime.now().time()).split(".")[0]}
+{Fore.GREEN}Event Dimulai: {Fore.WHITE}{eventStartTime}
+''')
+        tableRoundown(id, highlightTime=True)
         time.sleep(0.2)
         if keyboard.is_pressed("esc"):
             break
 
-def requiredInput(message):
-   first_time = True
+def requiredInput(message, ignoreFirst=False):
    while True:
-      if first_time: print("\033[F\033[K", end="")
-      first_time = False
-      answer = input(message)
-      if answer != "": return answer
+      if not ignoreFirst:
+        answer = input(message)
+        if answer != "": return answer
+      ignoreFirst = False
+      print("\033[F\033[K", end="")
 
-def confirmation(key):
-  print(f"Tekan apapun untuk melanjutkan, tekan {key} untuk kembali")
-  if keyboard.read_event().name == key: return False
-  return True
+def intInput(message):
+  while True:
+    try:
+        answer = int(input(message))
+        return answer
+    except ValueError: print("\033[F\033[K", end="")
+
+def timeInput(message):
+  while True:
+    try:
+        answer = input(message) 
+        datetime.strptime(answer, "%H:%M").time()
+        return answer
+    except ValueError: print("\033[F\033[K", end="")
+
+def confirmation(cancelKey='esc', nextKey='q'):
+  print(f"Tekan {nextKey} untuk melanjutkan, tekan {cancelKey} untuk kembali")
+  keyboard.block_key('enter')
+  while True:
+    if keyboard.is_pressed(cancelKey): return False
+    if keyboard.is_pressed(nextKey): return True
+
+def eventTimeValid(event_time):
+  try:
+    datetime.strptime(event_time, "%H:%M").time()
+    return True
+  except:
+    return False 
+  
+def searchKey(array_data,key, value):
+  filteredData = []
+  for data in array_data:
+    dataKey = data.get(key)
+    if not dataKey: continue
+    if str(value).lower() in str(dataKey).lower(): filteredData.append(data)
+  return filteredData

@@ -1,5 +1,5 @@
 {
-    "current_id": 16,
+    "current_id": 17,
     "datas": {
         "0": {
             "roundown_identifier": "0-RNON",
@@ -126,6 +126,15 @@
             "event_date": "2024-12-02",
             "city": "Sukabumi",
             "event_location": "Alun Alun"
+        },
+        "17": {
+            "roundown_identifier": "17-RNON",
+            "event_name": "Seminar Pembuatan Poster",
+            "event_time": "16:30",
+            "event_desc": "Seminar ini diadakan untuk memberi ilmu\ntentang tata cara pembuatan poster yanng baik dan menarik untuk masyarakat",
+            "event_date": "2024-12-12",
+            "city": "Pangkalpinang",
+            "event_location": "Hotel Novotel"
         }
     }
 }

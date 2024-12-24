@@ -10,37 +10,42 @@ _eventService = Event()
 _roundownService = Roundown()
 maxCharLength = 20
 
-def tableEvent(assigned=None, created=None):
-    eventData = _eventService.getAll(assigned_array=assigned, created_array=created) #Ambil data dari service
+def tableEvent(assigned=None, created=None, search=None):
+    eventData = _eventService.getAll(assigned_array=assigned, created_array=created, search=search) #Ambil data dari service
     tableData = [["Nama Event", "Jadwal", "Tempat", "Deskripsi"]]
-    for data in eventData: tableData.append([data['event_name'], f"{data['event_date'] + ' ' + data['event_time']}", f"{data['event_location'] + ', ' + data['city']}", maxCharacter(data['event_desc'], maxCharLength)]) #Masukin ke tableData (variable yang bakal dipake buat tabulate)
+    for data in eventData: tableData.append([data['event_name'], f"{data['event_date'] + ' ' + data['event_time']}", f"{data['event_location'] + ', ' + data['city']}", maxCharacter(data['event_desc'], maxCharLength).split('\n')[0]]) #Masukin ke tableData (variable yang bakal dipake buat tabulate)
     return print(tabulate(tableData, headers="firstrow", tablefmt="github"))
 
-def tableCreatedEvent(created=None):
-   eventData = _eventService.getAll(created_array=created) #Ambil data dari service
+def tableCreatedEvent(created=None, search=None):
+   eventData = _eventService.getAll(created_array=created, search=search) #Ambil data dari service
    tableData = [["Nama Event", "Jadwal", "Tempat", "Deskripsi"]]
-   for data in eventData: tableData.append([data['event_name'], f"{data['event_date'] + ' ' + data['event_time']}", f"{data['event_location'] + ', ' + data['city']}", maxCharacter(data['event_desc'], maxCharLength)]) #Masukin ke tableData (variable yang bakal dipake buat tabulate)
+   for data in eventData: tableData.append([data['event_name'], f"{data['event_date'] + ' ' + data['event_time']}", f"{data['event_location'] + ', ' + data['city']}", maxCharacter(data['event_desc'], maxCharLength).split('\n')[0]]) #Masukin ke tableData (variable yang bakal dipake buat tabulate)
    return print(tabulate(tableData, headers="firstrow", tablefmt="github")) 
 
-def tableAssignedEvent(assigned=None):
-   eventData = _eventService.getAll(assigned_array=assigned) #Ambil data dari service
+def tableAssignedEvent(assigned=None, search=None):
+   eventData = _eventService.getAll(assigned_array=assigned, search=search) #Ambil data dari service
    tableData = [["Nama Event", "Jadwal", "Tempat", "Deskripsi"]]
-   for data in eventData: tableData.append([data['event_name'], f"{data['event_date'] + ' ' + data['event_time']}", f"{data['event_location'] + ', ' + data['city']}", maxCharacter(data['event_desc'], maxCharLength)]) #Masukin ke tableData (variable yang bakal dipake buat tabulate)
+   for data in eventData: tableData.append([data['event_name'], f"{data['event_date'] + ' ' + data['event_time']}", f"{data['event_location'] + ', ' + data['city']}", maxCharacter(data['event_desc'], maxCharLength).split('\n')[0]]) #Masukin ke tableData (variable yang bakal dipake buat tabulate)
    return print(tabulate(tableData, headers="firstrow", tablefmt="github"))
 
-def tableRoundown(event_id):
+def tableRoundown(event_id, highlightTime=None):
     eventData = _eventService.getOne(event_id)
     roundownData = list(_roundownService.getOne(eventData.get("roundown_identifier")) or [])
 
+    currentTime = datetime.now().time()
     eventTime = datetime.strptime(eventData.get('event_time'), "%H:%M").time()
     tableData = [["Nama Kegiatan", "Jadwal", "Deskripsi"]]
+    if highlightTime: tableData.append("X")
     if roundownData and roundownData:
      for data in roundownData:
         rdDuration = data["duration"]
         previousEventTime = eventTime
         eventTime = addDuration(eventTime, rdDuration)
-  
-        tableData.append([data['roundown_name'], f"{previousEventTime} - {eventTime} ({rdDuration}`)", maxCharacter(data['description'], maxCharLength)])
+
+        isCurrent = previousEventTime <= currentTime <= eventTime if highlightTime else None
+        rundownItem = [data['roundown_name'], f"{previousEventTime} - {eventTime} ({rdDuration}`)", maxCharacter(data['description'], maxCharLength).split('\n')[0]]
+        if highlightTime: rundownItem.append(f"{Fore.GREEN}<{Fore.WHITE}" if isCurrent else "")
+        tableData.append(rundownItem)
      return print(tabulate(tableData, headers="firstrow", tablefmt="github"))
     else:
       print("Tidak ada data rundown")
@@ -52,7 +57,7 @@ def tableInputEvent(callback, assigned=None, created=None):
     
     inputIndex, shownTable = 1,[["Nama Event", "Jadwal", "Tempat", "Deskripsi"]]
     for mainKey, data in table:
-        shownTable.append([" ", data['event_name'], f"{data['event_date'] + ' ' + data['event_time']}", f"{data['event_location'] + ', ' + data['city']}", maxCharacter(data['event_desc'], maxCharLength)])
+        shownTable.append([" ", data['event_name'], f"{data['event_date'] + ' ' + data['event_time']}", f"{data['event_location'] + ', ' + data['city']}", maxCharacter(data['event_desc'], maxCharLength).split('\n')[0]])
     shownTableLength = len(shownTable)
     while True:
         clear()
@@ -85,7 +90,7 @@ def tableInputRundown(callback, rd_id, notes="Please select rundown"):
   
   inputIndex, shownTable = 1,[["Pilih","Nama Kegiatan", "Jadwal", "Deskripsi"]]
   for data in table:
-      shownTable.append([" ",data['roundown_name'],data['duration'], maxCharacter(data['description'], maxCharLength)])
+      shownTable.append([" ",data['roundown_name'],data['duration'], maxCharacter(data['description'], maxCharLength).split('\n')[0]])
   shownTableLength = len(shownTable)
 
   while True:

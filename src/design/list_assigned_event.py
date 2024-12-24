@@ -9,19 +9,23 @@ def listAllAssignedEvent():
     
     user = getLocalUser()
     assignedEventIds = user.get('assignedEvent', [])
-    
-    clear()
-    generateTitle("List All Assigned Events", 33)
-    
-    choices = ["Back to dashboard"]
-    
-    if not assignedEventIds: print("\n\t\tTidak ada event yang telah di-assign untuk pengguna ini.")
-    if assignedEventIds:
-        tableTemplate.tableAssignedEvent(assigned=user['assignedEvent']) 
-        choices.insert(0, "Select Event")  
-    
-    answer = inquirer.list_input(
-        "Next Action...", choices=choices)
-    
-    if answer == "Back to dashboard": return dashboard()
-    elif answer == "Select Event": return selectAssignedEvent()
+    searchData = None
+    while True:
+        clear()
+        generateTitle("List All Assigned Events", 33)
+        
+        choices = ["Search Event","Back to dashboard"]
+        
+        if not assignedEventIds: print("\n\t\tTidak ada event yang telah di-assign untuk pengguna ini.")
+        if assignedEventIds:
+            tableTemplate.tableAssignedEvent(assigned=user['assignedEvent'], search=searchData) 
+            choices.insert(0, "Select Event")  
+        print()
+        answer = inquirer.list_input(
+            "Next Action...", choices=choices)
+        
+        if answer == "Back to dashboard": return dashboard()
+        elif answer == "Search Event":
+            searchData = input("Cari nama event: ")
+            continue
+        elif answer == "Select Event": return selectAssignedEvent()

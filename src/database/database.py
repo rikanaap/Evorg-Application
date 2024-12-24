@@ -1,43 +1,43 @@
 import json
 class Database:
-    def __init__(self, file_name, options={}):
+    def _init_(self, file_name, options={}):
         self.file_path = f"src/database/json/{file_name}.json"
         self.file_model_path = f"src/database/json/models/{file_name}.json"
 
-        self.DB_DATA = self.__getRawDataMain__()
-        self.DB_MODEL_DATA = self.__getRawDataModel__()
+        self.DB_DATA = self._getRawDataMain_()
+        self.DB_MODEL_DATA = self._getRawDataModel_()
         if not self.DB_DATA or not self.DB_MODEL_DATA: raise ValueError("Failed to load database or model data.")
 
         self.model_idented = options.get('model_idented', False)
         self.identifier_unique = options.get('identifier_unique', True)
 
-    def __getRawDataMain__(self):
+    def _getRawDataMain_(self):
         try:
             with open(self.file_path, 'r') as file:
                 return json.load(file)
         except (FileNotFoundError, json.JSONDecodeError):
             return False
     
-    def __getRawDataModel__(self):
+    def _getRawDataModel_(self):
         try:
             with open(self.file_model_path, 'r') as file:
                 return json.load(file)
         except (FileNotFoundError, json.JSONDecodeError):
             return False
         
-    def __saveData__(self):
+    def _saveData_(self):
         with open(self.file_path, 'w') as file:
             json.dump(self.DB_DATA, file, indent=4)
 
-    def __updateData__(self):
-        self.DB_DATA = self.__getRawDataMain__()
-        self.DB_MODEL_DATA = self.__getRawDataModel__()
+    def _updateData_(self):
+        self.DB_DATA = self._getRawDataMain_()
+        self.DB_MODEL_DATA = self._getRawDataModel_()
 
     def getModel(self):
-        self.__updateData__()
+        self._updateData_()
         return self.DB_MODEL_DATA
     def getData(self, assigned=None, created=None):
-        self.__updateData__()
+        self._updateData_()
         dataFilter = self.DB_DATA
         if assigned is not None or created is not None:
             dataFilter['datas'] = {}
@@ -48,11 +48,11 @@ class Database:
         return self.DB_DATA if len(dataFilter) < 1 else dataFilter
     
     def getCurrentId(self):
-        self.__updateData__()
+        self._updateData_()
         return self.DB_DATA['current_id']
     
     def checkIdentifier(self, identifier):
-        self.__updateData__()
+        self._updateData_()
         return self.DB_DATA['datas'].get(identifier)
     
     def addData(self, data, identifier=None):
@@ -69,8 +69,8 @@ class Database:
             else: self.DB_DATA['datas'][identifier] = {**self.DB_MODEL_DATA, **data }
 
         self.DB_DATA['current_id'] += 1
-        self.__saveData__()
-        self.__updateData__()
+        self._saveData_()
+        self._updateData_()
         return self.checkIdentifier(identifier)
     
     def updateData(self, identifier, data, index=None):
@@ -79,11 +79,11 @@ class Database:
         
         if self.model_idented: 
             if index is None or not (0 <= index < len(identifierData)): return False
-            self.DB_DATA['datas'][identifier].insert(index, { **identifierData, **data })
+            self.DB_DATA['datas'][identifier][index] = data
         else: self.DB_DATA['datas'][identifier] = {**identifierData, **data }
 
-        self.__saveData__()
-        self.__updateData__()
+        self._saveData_()
+        self._updateData_()
         return self.checkIdentifier(identifier)
     
     def deleteData(self, identifier, options={}):
@@ -98,6 +98,6 @@ class Database:
             if 0 <= indexDelete < len(identifierData): self.DB_DATA['datas'][identifier].pop(indexDelete)
             else: return False
         
-        self.__saveData__()
-        self.__updateData__()
+        self._saveData_()
+        self._updateData_()
         return self

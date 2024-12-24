@@ -10,24 +10,25 @@ def display_event_list():
     user = getLocalUser()
     createdEvent = user['createdEvent']
     
-    clear()
-    generateTitle("List All Created Event", 34)
-    tableCreatedEvent(createdEvent)
-
-    choices = ["Create Event"]
-    if len(createdEvent) > 0: choices.append("Select Event")
-    choices.append("Back")
-    print()
-    option =inquirer.list_input("Options", choices=choices)
-    if option == "Create Event": return createEvent(display_event_list)
-    elif option == "Select Event": 
-        from src.design.select_event import selectEvent 
-        selectEvent(lambda: detailEvent(display_event_list), user['assignedEvent'], createdEvent)
-    elif option == "Back":
-        return clear(), dashboard()
-    else:
-        print("Invalid choice. Please choose a valid option.")
-        display_event_list()
-
-
-
+    searchData = None
+    while True:
+        clear()
+        generateTitle("List All Created Event", 34)
+        tableCreatedEvent(createdEvent, search=searchData)
+        choices = ["Search Event", "Create Event"]
+        if len(createdEvent) > 0: choices.append("Select Event")
+        choices.append("Back")
+        print()
+        option =inquirer.list_input("Options", choices=choices)
+        if option == "Create Event": return createEvent(display_event_list)
+        elif option == "Select Event": 
+            from src.design.select_event import selectEvent 
+            selectEvent(display_event_list,lambda: detailEvent(display_event_list), user['assignedEvent'], createdEvent)
+        elif option == "Search Event":
+            searchData = input("Cari nama event: ")
+            continue
+        elif option == "Back":
+            return clear(), dashboard()
+        else:
+            print("Invalid choice. Please choose a valid option.")
+            display_event_list()

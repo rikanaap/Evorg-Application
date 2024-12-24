@@ -1,9 +1,10 @@
-from utils.helper import generateTitle, multilineInput, clear, requiredInput, confirmation
+from utils.helper import generateTitle, multilineInput, clear, requiredInput, confirmation, intInput
 from src.design.table import tableRoundown, tableInputRundown
 from utils.local import getLocalRundown, getLocalRundownId, setLocalRundown
 from src.service.roundown import Roundown
 from src.design.confirm_rundown import confirmRundown
-import inquirer
+import inquirer, keyboard
+from colorama import Fore
 _rundownService = Roundown()
 
 def updateRundown(callback, index_below):
@@ -12,18 +13,17 @@ def updateRundown(callback, index_below):
     rundownData = getLocalRundown()
     data_old = rundownData[index_below]
 
-    clear(), generateTitle('Add New Rundown', 14)
+    clear(), generateTitle('Update Rundown', 14)
     confirm = confirmation('esc')
+    keyboard.unblock_key('enter')
     if not confirm: return callback()
-    # while keyboard.is_pressed("enter"): pass
 
-    print(rundownData)
-    try:
-      data_old['roundown_name'] = inquirer.text(message=f"Nama Rundown [{data_old['roundown_name']}]\t", autocomplete=data_old['roundown_name'])
-      data_old['duration'] = int(inquirer.text(message=f"Durasi Rundown [{data_old['duration']}]\t"))
-    except ValueError: return updateRundown(callback, index_below)
-
-    data_old['description'] = multilineInput(f"Deskripsi Rundown\t[{data_old['description']}]:\nTulis deskripsi rundown")
+    data_old['roundown_name'] = requiredInput(f"Nama Rundown [{data_old['roundown_name']}]\t: ")
+    data_old['duration'] = intInput(f"Durasi Rundown [{data_old['duration']}]\t: ")
+    data_old['description'] = multilineInput(f'''
+{Fore.GREEN}Deskripsi sebelumnya: {Fore.WHITE}
+{data_old['description']}
+{Fore.GREEN}Deskripsi baru{Fore.WHITE}''')
     data_old['index_below'] = index_below
   
     def on_create_success():

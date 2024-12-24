@@ -9,11 +9,12 @@ from src.design.createdPage import display_event_list
 _userService = User()
 _eventService = Event()
 
-def selectEvent(callback=None, assigned=None, created=None):
+def selectEvent(backCallback, nextCallback, assigned=None, created=None):
     clear()
-    selectedId = tableInputEvent(callback, assigned, created )  
+    selectedId = tableInputEvent(backCallback, assigned, created )  
+    print(selectedId)
     setLocalEvent(str(selectedId))
-    callback()
+    nextCallback()
   
 # def showRundown(callback=None):
 #   clear()
@@ -24,4 +25,3 @@ def selectEvent(callback=None, assigned=None, created=None):
 #         "Go to...", choices=["Back"])
 #   if answer == "Back":
 #     action(callback)
-    

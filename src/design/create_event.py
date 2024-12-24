@@ -1,6 +1,6 @@
 from src.service.event import Event
 from colorama import Fore
-from utils.helper import generateTitle, clear, multilineInput
+from utils.helper import generateTitle, clear, multilineInput, confirmation, requiredInput, timeInput
 import keyboard
 
 _eventService = Event()
@@ -13,14 +13,16 @@ def createEvent(callback):
     eventCreated = False
     while not eventCreated:
         clear(), generateTitle("Create Event", 14)
-        print("Press any key untuk melanjutkan, tekan esc untuk kembali ke menu utama")
-        if keyboard.read_event().name == "esc": return callback()
-        datas['event_name'] = input("Nama Event\t\t\t: ")
-        datas['event_date'] = input("Tanggal Event (YYYY-MM-DD)\t: ")  
-        datas['event_time'] = input("Waktu Event (hh:mm)\t\t: ")
-        datas['city'] = input("Kota Event\t\t\t: ")
-        datas['event_location'] = input("Lokasi Event\t\t\t: ")
-        datas['event_desc'] = multilineInput("Tulis deskripsi event")
+        confirm = confirmation('esc', 'q')
+        keyboard.unblock_key('enter')
+        if not confirm: return callback()
+
+        datas['event_name'] = requiredInput(f"Nama Event\t\t\t: ")
+        datas['event_date'] = requiredInput(f"Tanggal Event (YYYY-MM-DD)\t: ")
+        datas['event_time'] = timeInput(f"Waktu Mulai Event (HH:MM)\t: ")
+        datas['city'] = requiredInput(f"Dilaksanakan di Kota\t\t: ")
+        datas['event_location'] = requiredInput(f"Detail Lokasi Event\t\t: ")
+        datas['event_desc'] = multilineInput("Ketik deskripsi event")
 
         clear()
         print(

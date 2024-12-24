@@ -2,7 +2,7 @@ from src.database.database import Database
 from src.service.roundown import Roundown
 from src.service.user import User
 class Event:
-    def __init__(self):
+    def _init_(self):
         self.databaseModel = Database('event')
         self.serviceRoundown = Roundown()
         self.serviceUser = User()
@@ -10,9 +10,11 @@ class Event:
     def getEventId(self, roundown_identifier):
         return self.databaseModel.checkIdentifier(roundown_identifier)
     
-    def getAll(self, assigned_array=None, created_array=None):
+    def getAll(self, assigned_array=None, created_array=None, search=None):
+        from utils.helper import searchKey
         databaseData = self.databaseModel.getData(assigned=assigned_array, created=created_array)
         databaseData = databaseData['datas'].values()
+        if search: databaseData = searchKey(databaseData, 'event_name', search)
         return databaseData
     
     def getRawAll(self, assigned_array=None, created_array=None ):
@@ -29,4 +31,3 @@ class Event:
     
     def updateEvent(self, event_id, updates):
         return self.databaseModel.updateData(event_id, updates)
-    

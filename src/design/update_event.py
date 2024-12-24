@@ -1,5 +1,5 @@
-from utils.helper import generateTitle, clear, multilineInput
-import inquirer
+from utils.helper import generateTitle, clear, multilineInput, confirmation, requiredInput, timeInput
+import inquirer, keyboard
 from src.service.event import Event
 from src.design.dashboard_spv import dashboard
 from utils.local import setLocalEvent, getLocalEvent, getLocalUser, getLocalEventId
@@ -19,15 +19,20 @@ def updateEvent(callback):
     itemUpdated = False
     while not itemUpdated:
         clear(),generateTitle("Update Event", 14) 
-        event_questions = [
-            inquirer.Text('event_name', message=f"Nama Event [{event['event_name']}]\t", default=event['event_name']),
-            inquirer.Text('event_date', message=f"Tanggal Event [{event['event_date']}]\t", default=event['event_date']),
-            inquirer.Text('event_time', message=f"Waktu Event [{event['event_time']}]\t", default=event['event_time']),
-            inquirer.Text('city', message=f"Kota Event [{event['city']}]\t", default=event['city']),
-            inquirer.Text('event_location', message=f"Lokasi Event [{event['event_location']}]\t", default=event['event_location']),
-            inquirer.Text('event_desc', message=f"Deskripsi Event [{event['event_desc']}]\t", default=event['event_desc']),
-        ]
-        answers = inquirer.prompt(event_questions)
+        confirm = confirmation('esc')
+        if not confirm: return callback()
+        
+        keyboard.unblock_key('enter')
+        answers = {}
+        answers['event_name'] = requiredInput(f"Nama Event [{event['event_name']}]\t\t: ")
+        answers['event_date'] = requiredInput(f"Tanggal Event [{event['event_date']}]\t: ")
+        answers['event_time'] = timeInput(f"Waktu Mulai Event [{event['event_time']}]\t: ")
+        answers['city'] = requiredInput(f"Dilaksanakan di Kota [{event['city']}]\t: ")
+        answers['event_location'] = requiredInput(f"Detail Lokasi Event [{event['event_location']}]\t: ")
+        answers['event_desc'] = multilineInput(f'''
+{Fore.GREEN}Deskripsi sebelumnya:{Fore.WHITE}
+{event['event_desc']}
+{Fore.GREEN}Deskripsi baru:{Fore.WHITE}''')
 
         while True:
             clear()
@@ -50,4 +55,3 @@ f"""Tolong Periksa apakah data sudah benar, data dibawah akan ditampilkan dan di
                 if secondConfirm in ['y', 'yes']: break
                 else:
                     return callback()
-

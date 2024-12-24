@@ -1,9 +1,10 @@
-from utils.helper import clear, generateTitle, generateRoundown
+from utils.helper import clear, generateTitle, generateRoundown, eventTimeValid
 from utils.local import getLocalEvent, getLocalUser, getLocalEventId
 from src.design.update_event import updateEvent
 from src.design.detail_rundown import detailRundown
+from src.design.select_rundown import selectRundown
 from src.service.user import User
-
+from colorama import Fore
 import inquirer
 _userService = User()
 
@@ -16,6 +17,8 @@ def detailEvent(callback, filter={"hide_assigned": False }, shouldRecurse=False)
         user = getLocalUser()
         event  = getLocalEvent()
         eventId = getLocalEventId()
+        if eventId is None: return callback()
+        timeValid = eventTimeValid(event.get('event_time'))
         
         generateTitle("Detail Event", 18)
         print(f"Nama Event  : {event['event_name']}")
@@ -24,7 +27,9 @@ def detailEvent(callback, filter={"hide_assigned": False }, shouldRecurse=False)
         print(f"Deskripsi   : {event['event_desc']}")
 
         print("")
-        choices = ["Assign Event", "Lihat Rundown", "Back"] if user['role'] != "spv" else ["Update Event", "Detail Rundown", "Back"]
+        if user['role'] != 'user' and not timeValid: print(Fore.RED + "Please change event time!" + Fore.WHITE)
+        choices = ["Assign Event", "Back"] if user['role'] != "spv" else ["Update Event", "Back"]
+        if timeValid: choices.insert(1, "Lihat Rundown") if user['role'] != "spv" else choices.insert(1, 'Detail Rundown')
         if user['role'] != "spv" and removeAssignEvent: choices.pop(0)
         answer = inquirer.list_input("Go to...", choices=choices)
         if not firstInput:
