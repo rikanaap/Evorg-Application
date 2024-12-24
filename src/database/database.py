@@ -61,7 +61,6 @@ class Database:
         
         identiferExist = self.checkIdentifier(str(identifier))
         if self.identifier_unique and identiferExist: return False
-        print(data, self.model_idented)
         if data:
             if self.model_idented: 
                 if not identiferExist: self.DB_DATA['datas'][identifier] = []
