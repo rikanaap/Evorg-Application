@@ -1,4 +1,4 @@
-from utils.helper import generateTitle, clear, multilineInput, confirmation, requiredInput, timeInput
+from utils.helper import generateTitle, clear, multilineInput, confirmation, requiredInput, timeInput, dateInput
 import inquirer, keyboard
 from src.service.event import Event
 from src.design.dashboard_spv import dashboard
@@ -25,7 +25,7 @@ def updateEvent(callback):
         keyboard.unblock_key('enter')
         answers = {}
         answers['event_name'] = requiredInput(f"Nama Event [{event['event_name']}]\t\t: ")
-        answers['event_date'] = requiredInput(f"Tanggal Event [{event['event_date']}]\t: ")
+        answers['event_date'] = dateInput(f"Tanggal Event [{event['event_date']}]\t: ")
         answers['event_time'] = timeInput(f"Waktu Mulai Event [{event['event_time']}]\t: ")
         answers['city'] = requiredInput(f"Dilaksanakan di Kota [{event['city']}]\t: ")
         answers['event_location'] = requiredInput(f"Detail Lokasi Event [{event['event_location']}]\t: ")

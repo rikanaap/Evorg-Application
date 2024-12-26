@@ -88,7 +88,14 @@ def timeInput(message):
         datetime.strptime(answer, "%H:%M").time()
         return answer
     except ValueError: print("\033[F\033[K", end="")
-
+def dateInput(message):
+  while True:
+    try:
+        answer = input(message) 
+        datetime.strptime(answer, "%Y-%m-%d")
+        return answer
+    except ValueError: print("\033[F\033[K", end="")
+    
 def confirmation(cancelKey='esc', nextKey='q'):
   print(f"Tekan {nextKey} untuk melanjutkan, tekan {cancelKey} untuk kembali")
   keyboard.block_key('enter')

@@ -1,6 +1,6 @@
 from src.service.event import Event
 from colorama import Fore
-from utils.helper import generateTitle, clear, multilineInput, confirmation, requiredInput, timeInput
+from utils.helper import generateTitle, clear, multilineInput, confirmation, requiredInput, timeInput, dateInput
 import keyboard
 
 _eventService = Event()
@@ -18,7 +18,7 @@ def createEvent(callback):
         if not confirm: return callback()
 
         datas['event_name'] = requiredInput(f"Nama Event\t\t\t: ")
-        datas['event_date'] = requiredInput(f"Tanggal Event (YYYY-MM-DD)\t: ")
+        datas['event_date'] = dateInput(f"Tanggal Event (YYYY-MM-DD)\t: ")
         datas['event_time'] = timeInput(f"Waktu Mulai Event (HH:MM)\t: ")
         datas['city'] = requiredInput(f"Dilaksanakan di Kota\t\t: ")
         datas['event_location'] = requiredInput(f"Detail Lokasi Event\t\t: ")

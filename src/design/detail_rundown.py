@@ -1,5 +1,5 @@
 from utils.helper import clear, generateTitle, generateRoundown
-from utils.local import getLocalEvent, getLocalUser, getLocalEventId, setLocalRundown
+from utils.local import getLocalEvent, getLocalUser, getLocalEventId, setLocalRundown, getLocalRundown
 from src.service.user import User
 from src.design.table import tableRoundown, tableInputRundown
 from src.design.createRundown import createRundown
@@ -23,7 +23,9 @@ def detailRundown(callback):
         setLocalRundown(rundownId)
         print("")
 
-        choices = ["Tambah Rundown", "Edit Rundown", "Back"]
+        rundownData = getLocalRundown()
+        choices = ["Tambah Rundown", "Back"]
+        if len(rundownData): choices.insert(1, "Edit Rundown")
         # if event.get(''):
         answer = inquirer.list_input("Go to...", choices=choices)
         if answer == "Tambah Rundown":
