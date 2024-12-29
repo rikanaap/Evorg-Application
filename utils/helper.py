@@ -110,3 +110,11 @@ def searchKey(array_data,key, value):
     if not dataKey: continue
     if str(value).lower() in str(dataKey).lower(): filteredData.append(data)
   return filteredData
+def alertMessage(message, callback):
+  clear()
+  length = len(message)
+  print("=" * length)
+  print(message)
+  print("=" * length)
+  time.sleep(3)
+  return callback()

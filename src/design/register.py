@@ -4,7 +4,7 @@ from src.service.user import User
 from src.design.login import login
 
 def register_participant():
-
+    from src.design.first_page import first_page
     clear()
     userService = User()
     generateTitle("Registrasi Peserta", 14)
@@ -31,9 +31,10 @@ def register_participant():
             role = input("Pilih Role (spv/user)\t: ").lower()
             
             #validasi inputan role
-            while role not in ["spv", "user"]:
-                role = input("Role tidak valid. Masukkan 'spv' atau 'user'\t: ").lower()
+            while role not in ["spv", "user"]: role = input("Role tidak valid. Masukkan 'spv' atau 'user'\t: ").lower()
+            break
 
+        while True:
             confirm = input("Apakah Anda yakin ingin mendaftar? (yes/no): ").lower()
             if confirm == "yes":
                 data = {
@@ -48,8 +49,9 @@ def register_participant():
                     login()
                 else:
                     print("Terjadi kesalahan saat menyimpan data.")
-            else:
+            elif confirm == "no":
                 print("Registrasi dibatalkan.")
+                time.sleep(1)
+                first_page()
+            else: print("Invalid Input")
             time.sleep(1)
-
-
