@@ -14,7 +14,7 @@ class Event:
         from utils.helper import searchKey
         databaseData = self.databaseModel.getData(assigned=assigned_array, created=created_array)
         databaseData = databaseData['datas'].values()
-        if search: databaseData = searchKey(databaseData, 'event_name', search)
+        if search: databaseData = searchKey(databaseData, search, keys=['event_name', 'event_date', 'event_time', 'event_location', 'city'])
         return databaseData
     
     def getRawAll(self, assigned_array=None, created_array=None ):

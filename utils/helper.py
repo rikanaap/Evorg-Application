@@ -103,12 +103,13 @@ def eventTimeValid(event_time):
   except:
     return False 
   
-def searchKey(array_data,key, value):
+def searchKey(array_data, value, keys=None):
   filteredData = []
   for data in array_data:
-    dataKey = data.get(key)
-    if not dataKey: continue
-    if str(value).lower() in str(dataKey).lower(): filteredData.append(data)
+    for key in keys:
+      dataKey = data.get(key)
+      if not dataKey: continue
+      if dataKey and str(value).lower() in str(dataKey).lower(): filteredData.append(data)
   return filteredData
 def alertMessage(message, callback):
   clear()
