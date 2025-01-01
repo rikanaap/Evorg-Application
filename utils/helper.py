@@ -35,6 +35,7 @@ def maxCharacter(str, max):
    return str if len(str) <= max else str[0 : max - 2] + "..."
 
 def logOut(callback=None):
+  
   from src.design.first_page import first_page
   while True:
       confirm = input("Konfirmasi (yes/no): ").lower().strip()
@@ -114,12 +115,13 @@ def eventTimeValid(event_time):
   except:
     return False 
   
-def searchKey(array_data,key, value):
+def searchKey(array_data, value, keys=None):
   filteredData = []
   for data in array_data:
-    dataKey = data.get(key)
-    if not dataKey: continue
-    if str(value).lower() in str(dataKey).lower(): filteredData.append(data)
+    for key in keys:
+      dataKey = data.get(key)
+      if not dataKey: continue
+      if dataKey and str(value).lower() in str(dataKey).lower(): filteredData.append(data)
   return filteredData
 
 def alertMessage(message, callback):
