@@ -38,4 +38,4 @@ def confirmRundown(ident, positive_cb, negative_cb, data):
         answer = requiredInput("Konfirmasi untuk membuat data? (yes/no) : ")
 
         if answer == "yes" or answer == "y": return positive_cb()
-        elif answer == "no" == "n": return negative_cb()
+        elif answer == "no" or answer == "n": return negative_cb()

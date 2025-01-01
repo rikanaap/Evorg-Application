@@ -35,6 +35,7 @@ def maxCharacter(str, max):
    return str if len(str) <= max else str[0 : max - 2] + "..."
 
 def logOut(callback=None):
+  
   from src.design.first_page import first_page
   while True:
       confirm = input("Konfirmasi (yes/no): ").lower().strip()
