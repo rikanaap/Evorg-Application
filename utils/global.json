@@ -1,4 +1,4 @@
 {
-    "oneTimeLogin": false,
-    "user_username": ""
+    "oneTimeLogin": true,
+    "user_username": "harmoni"
 }

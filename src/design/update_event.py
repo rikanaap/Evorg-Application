@@ -22,7 +22,6 @@ def updateEvent(callback):
         confirm = confirmation('esc')
         if not confirm: return callback()
         
-        keyboard.unblock_key('enter')
         answers = {}
         answers['event_name'] = requiredInput(f"Nama Event [{event['event_name']}]\t\t: ")
         answers['event_date'] = dateInput(f"Tanggal Event [{event['event_date']}]\t: ")

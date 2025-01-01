@@ -1,4 +1,4 @@
-from utils.helper import generateTitle, multilineInput, clear, requiredInput, confirmation, intInput
+from utils.helper import generateTitle, multilineInput, clear, requiredInput, confirmation, intInput, alertMessage
 from src.design.table import tableRoundown, tableInputRundown
 from utils.local import getLocalRundown, getLocalRundownId, setLocalRundown
 from src.service.roundown import Roundown
@@ -15,7 +15,6 @@ def updateRundown(callback, index_below):
 
     clear(), generateTitle('Update Rundown', 14)
     confirm = confirmation('esc')
-    keyboard.unblock_key('enter')
     if not confirm: return callback()
 
     data_old['roundown_name'] = requiredInput(f"Nama Rundown [{data_old['roundown_name']}]\t: ")
@@ -28,12 +27,9 @@ def updateRundown(callback, index_below):
   
     def on_create_success():
       result = _rundownService.updateData(rundownId, data_old)
-      callback()
-
-    def on_create_failure():
-      callback()
+      alertMessage(f"{result[index_below]['roundown_name']} Berhasil di update", callback )
 
     confirmRundown("update"
      , on_create_success
-     , on_create_failure
+     , callback
      , data=data_old)

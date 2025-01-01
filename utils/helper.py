@@ -100,8 +100,12 @@ def confirmation(cancelKey='esc', nextKey='q'):
   print(f"Tekan {nextKey} untuk melanjutkan, tekan {cancelKey} untuk kembali")
   keyboard.block_key('enter')
   while True:
-    if keyboard.is_pressed(cancelKey): return False
-    if keyboard.is_pressed(nextKey): return True
+    if keyboard.is_pressed(cancelKey):
+       keyboard.unblock_key('enter')
+       return False
+    if keyboard.is_pressed(nextKey): 
+       keyboard.unblock_key('enter')
+       return True
 
 def eventTimeValid(event_time):
   try:
@@ -117,3 +121,12 @@ def searchKey(array_data,key, value):
     if not dataKey: continue
     if str(value).lower() in str(dataKey).lower(): filteredData.append(data)
   return filteredData
+
+def alertMessage(message, callback):
+  clear()
+  length = len(message)
+  print("=" * length)
+  print(message)
+  print("=" * length)
+  time.sleep(3)
+  return callback()

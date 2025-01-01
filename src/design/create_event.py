@@ -14,7 +14,6 @@ def createEvent(callback):
     while not eventCreated:
         clear(), generateTitle("Create Event", 14)
         confirm = confirmation('esc', 'q')
-        keyboard.unblock_key('enter')
         if not confirm: return callback()
 
         datas['event_name'] = requiredInput(f"Nama Event\t\t\t: ")
