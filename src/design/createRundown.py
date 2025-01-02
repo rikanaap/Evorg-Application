@@ -13,7 +13,6 @@ def createRundown(callback, index_below):
     confirm = confirmation('esc')
     if not confirm: return callback()
 
-    keyboard.unblock_key('enter')
     rundown_name = requiredInput("Rundown Name\t: ")
     duration = intInput("Duration (menit): ")
     description = multilineInput("Description\t: \nTulis deskripsi rundown")

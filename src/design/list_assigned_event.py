@@ -1,4 +1,4 @@
-from utils.helper import generateTitle, clear
+from utils.helper import generateTitle, clear, requiredInput
 import src.design.table as tableTemplate 
 from utils.local import getLocalUser
 import inquirer
@@ -26,6 +26,6 @@ def listAllAssignedEvent():
         
         if answer == "Back to dashboard": return dashboard()
         elif answer == "Search Event":
-            searchData = input("Cari nama event: ")
+            searchData = requiredInput("Cari nama event: ")
             continue
         elif answer == "Select Event": return selectAssignedEvent()

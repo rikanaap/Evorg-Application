@@ -1,4 +1,4 @@
-from utils.helper import generateTitle, clear
+from utils.helper import generateTitle, clear, requiredInput
 from src.design.select_event import selectEvent
 import src.design.table as tableTemplate 
 import inquirer
@@ -15,7 +15,7 @@ def listAllEvent():
         answer = inquirer.list_input("Next Action...", choices=["Search Event","Select Event", "Back to Dashboard"])
         if answer == "Back to Dashboard": return dashboard()
         elif answer == "Search Event":
-            searchData = input("Cari nama event: ")
+            searchData = requiredInput("Cari nama event: ")
             continue
         elif answer == "Select Event": return selectEvent(listAllEvent,lambda: detailEvent(listAllEvent))
     # Assign event
