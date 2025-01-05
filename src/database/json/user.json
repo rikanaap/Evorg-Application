@@ -1,5 +1,5 @@
 {
-    "current_id": 8,
+    "current_id": 10,
     "datas": {
         "rikanaap": {
             "username": "rikanaap",
@@ -114,6 +114,24 @@
                 "0",
                 "8"
             ]
+        },
+        "test_baru": {
+            "username": "test_baru",
+            "password": "5e884898da28047151d0e56f8dc6292773603d0d6aabbdd62a11ef721d1542d8",
+            "role": "user",
+            "createdEvent": [],
+            "assignedEvent": [
+                "11"
+            ]
+        },
+        "test_baru_spv": {
+            "username": "test_baru_spv",
+            "password": "5e884898da28047151d0e56f8dc6292773603d0d6aabbdd62a11ef721d1542d8",
+            "role": "spv",
+            "createdEvent": [
+                "20"
+            ],
+            "assignedEvent": []
         }
     }
 }

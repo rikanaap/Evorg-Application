@@ -10,7 +10,7 @@ _roundownService = Roundown()
 def confirmRundown(ident, positive_cb, negative_cb, data):
 
     clear()
-    generateTitle("Confirmation Create Event", 18)
+    generateTitle("Confirmation Create Rundown", 18)
     roundownData = getLocalRundown()
     eventData = getLocalEvent()
     eventTime = datetime.strptime(eventData.get('event_time'), "%H:%M").time()
